@@ -16,8 +16,6 @@ public class MongoGameDAO implements IGameDAO {
 	public void createGame(Game game) {
 		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Game");
-		table.drop();
-		table = db.getCollection("Game");
 		BasicDBObject document = new BasicDBObject();
 		document.put("create", game.getTimer());
 		document.put("freq", game.getDayNightFreq());
@@ -31,6 +29,13 @@ public class MongoGameDAO implements IGameDAO {
 		BasicDBObject query = (BasicDBObject) table.findOne();
 		Game game = new Game((int)query.get("freq"), (long)query.get("create"));
 		return game;
+	}
+	
+	@Override
+	public void removeGame() {
+		db = mongo.getDB("werewolf");
+		DBCollection table = db.getCollection("Game");
+		table.drop();
 	}
 
 }

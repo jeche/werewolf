@@ -1,5 +1,6 @@
 package edu.wm.werewolf.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -35,6 +36,7 @@ public class GameService {
 	final private double DEFAULT_SCENT_RANGE = 15000;
 	final private int KILL_POINTS = 2;
 	private boolean isRunning = false;
+	private List<String> playerUpdateList;
 	Timer timer;
 	Game game;
 	
@@ -84,10 +86,12 @@ public class GameService {
 	
 	public void updatePosition(String userName, GPSLocation location) 
 	{
-		Player player = playerDAO.getPlayerByID(userName);
+		WerewolfUser user = userDAO.getUserByUsername(userName);
+		Player player = playerDAO.getPlayerByID(user.getId());
 		player.setLat(location.getLat());
 		player.setLng(location.getLng());
 		playerDAO.update(player);
+		playerUpdateList.add(player.getId());
 	}
 
 	public void voteKill(String name) {
@@ -100,11 +104,12 @@ public class GameService {
 
 	// Creates a new game.
 	public void newGame(int gameTime) {
+		gameDAO.removeGame();
 		playerDAO.clearPlayers();
 		game = new Game(DEFAULT_GAME_TIME, (new Date()).getTime());
 		isRunning = true;
 		List<WerewolfUser> users = userDAO.getAllUsers();
-		if(users.size() == 0) {
+		if(users.size() - 1 == 0) {
 			isRunning = false;
 			game = null;
 			return;
@@ -112,15 +117,19 @@ public class GameService {
 		Random random = new Random();
 		boolean isWerewolf;
 		Collections.shuffle(users, random);
-		int j = users.size() / 10 * 3;
+		playerUpdateList = new ArrayList<String>();
+		int j = (users.size() - 1)/ 10 * 3;
 		for(int i = 0; i < users.size(); i++)
 		{
-			isWerewolf = false;
-			if(i <= j) {
-				isWerewolf = true;
+			if(!users.get(i).getUsername().equals("admin")) {
+				isWerewolf = false;
+				if(i <= j) {
+					isWerewolf = true;
+				}
+				// Original locations set to 0
+				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf));
+				playerUpdateList.add(users.get(i).getId());
 			}
-			// Original locations set to 0
-			playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf));
 		}
 		gameDAO.createGame(game);
 	}
@@ -161,5 +170,19 @@ public class GameService {
 	public Game getGame() {
 		// TODO Auto-generated method stub
 		return game;
+	}
+	
+	public boolean checkLocationUpdates() {
+		if(isRunning && !this.isOver()) {
+			List<Player> players = playerDAO.getAllAlive();
+			for(int i = 0; i < players.size(); i++) {
+				if(!playerUpdateList.contains(players.get(i).getId())) {
+					players.get(i).setDead(true);
+					playerDAO.update(players.get(i));
+				}
+			}
+			playerUpdateList = new ArrayList<String>();
+		}
+		return true;
 	}
 }

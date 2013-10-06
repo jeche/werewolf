@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import edu.wm.werewolf.dao.IUserDAO;
@@ -26,11 +27,18 @@ public class UserServiceImpl implements UserDetailsService, IUserService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
+		
 		WerewolfUser user = userDAO.getUserByUsername(username);
-		logger.info("hi" + user.getHashedPassword());
-		if(user == null) {
+		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
+		// TODO: Remove admin functionality
+		if(user == null&& username.equals("admin")) {
+			userDAO.createUser(new WerewolfUser("admin", "admin", "admin", "admin", encoded.encode("admin"), "admin"));
+			user = userDAO.getUserByUsername(username);
+		}
+		if(user == null && !username.equals("admin")) {
 			return null;
 		}
+		logger.info(user.toString());
 		Collection<GrantedAuthorityImpl> authorities = new ArrayList<GrantedAuthorityImpl>();
 		authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 		return new authUser(user.getUsername(), user.getHashedPassword(), true, true, true, true, authorities);

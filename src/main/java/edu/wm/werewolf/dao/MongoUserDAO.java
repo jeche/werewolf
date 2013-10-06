@@ -46,8 +46,10 @@ public class MongoUserDAO implements IUserDAO {
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
 		//TODO: Fix to allow users to be set as admins
+		
 		if(cursor == null) {
-			throw new NoPlayerFoundException(username);}
+			System.out.println("Shoot");
+			return null;}
 		WerewolfUser user = new WerewolfUser((String)cursor.get("_id"), (String)cursor.get("first"), (String)cursor.get("lastName"), username, (String)cursor.get("password"), (String)cursor.get("imageURL"));
 		
 		return user;

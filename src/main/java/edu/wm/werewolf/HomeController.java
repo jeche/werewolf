@@ -81,7 +81,16 @@ public class HomeController {
 	{
 		// add responseBody to package as a JSON object
 		List<Player> players = gameService.getAllAlive();
-		
+		if(!gameService.isOver()) {
+			for(int i = 0; i < players.size(); i++) {
+				players.get(i).setScore(0);
+				players.get(i).setLat(0);
+				players.get(i).setLng(0);
+				players.get(i).setVotedAgainst(null);
+				players.get(i).setWerewolf(false);
+				players.get(i).setUserId(null);
+			}
+		}
 		return players;
 	}
 	
@@ -89,6 +98,14 @@ public class HomeController {
 	public @ResponseBody List<Player> getAllPlayers(Principal principal)
 	{
 		List<Player> players = gameService.getAllPlayers();
+		for(int i = 0; i < players.size(); i++) {
+			players.get(i).setScore(0);
+			players.get(i).setLat(0);
+			players.get(i).setLng(0);
+			players.get(i).setVotedAgainst(null);
+			players.get(i).setWerewolf(false);
+			players.get(i).setUserId(null);
+		}
 		return players;
 	}
 	
@@ -162,7 +179,6 @@ public class HomeController {
 			@RequestParam("hashedPassword")String hashedPassword, Principal principal)
 	{
 		principal.getName();
-		logger.info("VICTORRRYYYY!!" + username);
 		String imageURL = "";
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
@@ -197,38 +213,7 @@ public class HomeController {
 			logger.info("Going to get the most votes for day " + (int)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
 			List<Vote> voteList = voteDAO.mostVotes((int)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
 			logger.info("Vote List: " + voteList.toString());
-		/*// System.out.println(gameService.isNight())
-		if(false) { // can't actually run because would be null each time
-			List<Vote> voteList = new ArrayList<Vote>();
-			List<Player> playerList = gameService.getAllAlive();
-			Vote vote;
-			for(int i = 0; i < playerList.size(); i++) {
-				vote = new Vote(playerList.get(i).getVotedAgainst(), 1);
-				if(voteList.contains(vote)) {
-					voteList.get(voteList.indexOf(vote)).setNumVotes(voteList.get(voteList.indexOf(vote)).getNumVotes() + 1);
-				}
-			else {
-				voteList.add(vote);
-			}
-		}
-		int max = 0;
-		int j = 0;
-		while(j < voteList.size())
-		{
-			if(voteList.get(j).getNumVotes() < max) {
-				voteList.remove(voteList.get(j));
-			}
-			else {
-				max = voteList.get(j).getNumVotes();
-				j++;
-			}
-		}
-		if(max > 0) {
-			for(int k = 0; k < voteList.size(); k++) {
-				gameService.voteKill(voteList.get(k).getName());
-			}
-		}
-		}*/
+			gameService.checkLocationUpdates();
 		}
 	}
 	
