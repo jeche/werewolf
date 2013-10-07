@@ -11,8 +11,11 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config />
-	<bean id="mongo" name="mongo" class="com.mongodb.MongoClient">
-	</bean>
+	    <!-- create db object by calling getDB on mongo bean -->
+<context:property-placeholder/>
+    <bean id="mongo" class="com.mongodb.MongoURI">
+      <constructor-arg value="${MONGOHQ_URL}"/>
+    </bean>
 	<bean id="playerDAO" class="edu.wm.werewolf.dao.MongoPlayerDAO"></bean>
 	<task:executor id="myExecutor" pool-size="5"/>
 	<task:scheduler id="myScheduler" pool-size="10"/>
