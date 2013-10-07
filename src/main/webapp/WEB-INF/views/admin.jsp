@@ -21,7 +21,7 @@
 <div id="accordion">
 <h3>Add a User</h3>
 <div>
-<form action="/werewolf/addUser" method="post">
+<form action="/addUser" method="post">
 First name: <input type="text" name="firstName"><br>
 Last name: <input type="text" name="lastName"><br>
 Password: <input type="text" name="hashedPassword"><br>
