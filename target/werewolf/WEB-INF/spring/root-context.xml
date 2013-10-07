@@ -14,7 +14,7 @@
 	    <!-- create db object by calling getDB on mongo bean -->
 <context:property-placeholder/>
     <bean id="mongo" class="com.mongodb.MongoURI">
-      <constructor-arg value="${MONGOHQ_URL}"/>
+      <constructor-arg value="mongodb://jlchen@email.wm.edu:whasian1@widmore.mongohq.com:10010/werewolf"/>
     </bean>
 	<bean id="playerDAO" class="edu.wm.werewolf.dao.MongoPlayerDAO"></bean>
 	<task:executor id="myExecutor" pool-size="5"/>
