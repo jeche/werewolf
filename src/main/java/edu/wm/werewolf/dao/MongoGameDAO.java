@@ -10,11 +10,11 @@ import com.mongodb.MongoClient;
 import edu.wm.werewolf.model.Game;
 
 public class MongoGameDAO implements IGameDAO {
-	@Autowired private MongoClient mongo;
-	DB db;
+//	@Autowired private MongoClient mongo;
+	@Autowired DB db;
 	@Override
 	public void createGame(Game game) {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Game");
 		BasicDBObject document = new BasicDBObject();
 		document.put("create", game.getTimer());
@@ -24,7 +24,7 @@ public class MongoGameDAO implements IGameDAO {
 
 	@Override
 	public Game getGame() {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Game");
 		BasicDBObject query = (BasicDBObject) table.findOne();
 		Game game = new Game((int)query.get("freq"), (long)query.get("create"));
@@ -33,7 +33,7 @@ public class MongoGameDAO implements IGameDAO {
 	
 	@Override
 	public void removeGame() {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Game");
 		table.drop();
 	}

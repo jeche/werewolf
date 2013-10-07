@@ -20,12 +20,12 @@ import edu.wm.werewolf.model.Player;
 import edu.wm.werewolf.model.WerewolfUser;
 
 public class MongoUserDAO implements IUserDAO {
-	@Autowired private MongoClient mongo;
-	DB db;
+//	@Autowired private MongoClient mongo;
+	@Autowired DB db;
 	@Override
 	public void createUser(WerewolfUser user) {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+//		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("User");
 		BasicDBObject document = new BasicDBObject();
 		document.put("_id", user.getId());
@@ -39,7 +39,7 @@ public class MongoUserDAO implements IUserDAO {
 	
 	public WerewolfUser getUserByUsername(String username)
 	{
-		db = mongo.getDB("werewolf");
+		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("User");
 		BasicDBObject query = new BasicDBObject("username", username);
 		DBObject cursor = table.findOne(query);
@@ -57,7 +57,7 @@ public class MongoUserDAO implements IUserDAO {
 
 	@Override
 	public List<WerewolfUser> getAllUsers() {
-		db = mongo.getDB("werewolf");
+		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("User");
 		DBCursor cursor = table.find();
 		WerewolfUser alive;

@@ -18,15 +18,16 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoURI;
 
 import edu.wm.werewolf.HomeController;
 import edu.wm.werewolf.exceptions.NoPlayerFoundException;
 import edu.wm.werewolf.model.Player;
 
 public class MongoPlayerDAO implements IPlayerDAO {
-	@Autowired private MongoClient mongo;
+//	@Autowired private MongoURI mongo;
 	private static final Logger logger = LoggerFactory.getLogger(MongoPlayerDAO.class);
-	private DB db;
+	@Autowired DB db;
 	
 	public MongoPlayerDAO(){
 		// TODO Auto-generated constructor stub
@@ -35,7 +36,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 	@Override
 	public List<Player> getAllAlive() {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject query = new BasicDBObject("isDead", false);
 		DBCursor cursor = table.find(query);
@@ -59,7 +60,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 	public void update(Player updated) throws NoPlayerFoundException {
 		// TODO Auto-generated method stub
 		getPlayerByID(updated.getId());
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject document = new BasicDBObject();
 		document.put("_id", updated.getId());
@@ -77,7 +78,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 	@Override
 	public void createPlayer(Player player) {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject document = new BasicDBObject();
 		document.put("_id", player.getId());
@@ -94,7 +95,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 
 	@Override
 	public Player getPlayerByID(String id) throws NoPlayerFoundException {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject query = new BasicDBObject("_id", id);
 		DBObject cursor = table.findOne(query);
@@ -107,7 +108,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 	@Override
 	public List<Player> getAllPlayers() {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		Player alive;
 		List<Player> players = new ArrayList<>();
@@ -130,14 +131,15 @@ public class MongoPlayerDAO implements IPlayerDAO {
 	 * @return the mongo
 	 */
 	public MongoClient getMongo() {
-		return mongo;
+//		return mongo;
+		return null;
 	}
 
 	/**
 	 * @param mongo the mongo to set
 	 */
 	public void setMongo(MongoClient mongo) {
-		this.mongo = mongo;
+//		this.mongo = mongo;
 	}
 
 	/**
@@ -157,7 +159,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 	@Override
 	public List<Player> nearPlayers(Player player, double distance) {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBList v1 = new BasicDBList();
 		v1.add(player.getLng());
@@ -184,14 +186,14 @@ public class MongoPlayerDAO implements IPlayerDAO {
 
 	@Override
 	public void clearPlayers() {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		table.drop();
 	}
 
 	@Override
 	public int numWolves() {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject query = new BasicDBObject("isWerewolf", true);
 		DBCursor cursor = table.find(query);
@@ -212,7 +214,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 
 	@Override
 	public int numTown() {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject query = new BasicDBObject("isWerewolf", false);
 		DBCursor cursor = table.find(query);

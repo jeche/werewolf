@@ -17,11 +17,11 @@ import edu.wm.werewolf.model.Player;
 import edu.wm.werewolf.model.Vote;
 
 public class MongoVoteDAO implements IVoteDAO {
-	@Autowired private MongoClient mongo;
-	private DB db;
+//	@Autowired private MongoClient mongo;
+	@Autowired private DB db;
 	@Override
 	public void addVote(Vote vote) {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject document = new BasicDBObject();
 		document.put("player", vote.getName());
@@ -40,7 +40,7 @@ public class MongoVoteDAO implements IVoteDAO {
 	}
 	
 	public List<Vote> mostVotes(int day) {
-		db = mongo.getDB("werewolf");
+//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		BasicDBObject document = new BasicDBObject();
 		document.put("day", day);

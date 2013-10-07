@@ -25,15 +25,15 @@ import edu.wm.werewolf.model.Kill;
 import edu.wm.werewolf.model.Player;
 
 public class MongoKillDAO implements IKillDAO {
-	@Autowired private MongoClient mongo;
-	private DB db;
+//	@Autowired private MongoClient mongo;
+	@Autowired private DB db;
 	@Autowired private IPlayerDAO playerDAO;
 	static DateFormat dateFormat = new SimpleDateFormat();
 	
 	@Override
 	public void createKill(Player victim, Player killer) throws NoPlayerFoundException {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		// If werewolf kills a player
 		BasicDBObject document = new BasicDBObject();
@@ -61,7 +61,7 @@ public class MongoKillDAO implements IKillDAO {
 	@Override
 	public List<Kill> getAllKills() {
 		// TODO Auto-generated method stub
-		db = mongo.getDB("werewolf");
+		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		DBCursor cursor = table.find();
 		Kill kill;
@@ -91,7 +91,7 @@ public class MongoKillDAO implements IKillDAO {
 	@Override
 	public List<Kill> getKillsByPlayerID(String id)
 			throws NoPlayerFoundException {
-		db = mongo.getDB("werewolf");
+		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Player");
 		// TODO Auto-generated method stub
 		return null;
@@ -101,14 +101,15 @@ public class MongoKillDAO implements IKillDAO {
 	 * @return the mongo
 	 */
 	public MongoClient getMongo() {
-		return mongo;
+//		return mongo;
+		return null;
 	}
 
 	/**
 	 * @param mongo the mongo to set
 	 */
 	public void setMongo(MongoClient mongo) {
-		this.mongo = mongo;
+//		this.mongo = mongo;
 	}
 
 	/**
