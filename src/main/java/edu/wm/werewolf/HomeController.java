@@ -142,6 +142,7 @@ public class HomeController {
 		WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 		List<Player> players = gameService.scent(user.getId());
 		if(players == null) {
+			// Person making a the request is not a werewolf.
 			players= new ArrayList<Player>();
 			Player player = new Player("NOT A WEREWOLF", false, 0, 0, "NOT A WEREWOLF", false);
 			players.add(player);
@@ -151,12 +152,15 @@ public class HomeController {
 		List<Player> killplayers = gameService.killable(user.getId());
 		for(int i = 0; i < players.size(); i++) {
 			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))) {
+				// Is a kill-able player
 				players.get(i).setScore(1);
 			}
 			else{
-			players.get(i).setScore(0);
+				// Is a nearby, but not a kill-able player
+				players.get(i).setScore(0);
 			}
 			if(players.get(i).isWerewolf()) {
+				// If a scented player is a werewolf the score the other player sees is 2.
 				players.get(i).setScore(2);
 			}
 			players.get(i).setLat(0);
@@ -237,6 +241,11 @@ public class HomeController {
 			logger.info("Going to get the most votes for day " + ((long)(new Date()).getTime() - gameService.getGame().getTimer()) / (gameService.getGame().getDayNightFreq()*2));
 			List<Vote> voteList = voteDAO.mostVotes((long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
 			logger.info("Vote List: " + voteList.toString());
+			for(int i = 0; i < voteList.size(); i++) {
+				if(gameService.voteKill(voteList.get(i).getName())) {
+					gameService.endGame();
+				}
+			}
 			/*gameService.checkLocationUpdates();*/
 			wasDay = false;
 		}

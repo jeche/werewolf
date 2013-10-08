@@ -78,4 +78,18 @@ public class MongoUserDAO implements IUserDAO {
 		return players;
 	}
 
+	@Override
+	public void update(WerewolfUser user) {
+		// TODO Auto-generated method stub
+		DBCollection table = db.getCollection("User");
+		BasicDBObject document = new BasicDBObject();
+		document.put("_id", user.getId());
+		document.put("password", user.getHashedPassword());
+		document.put("first", user.getFirstName());
+		document.put("last", user.getLastName());
+		document.put("username", user.getUsername());
+		document.put("img", user.getImageURL());
+		table.save(document);
+	}
+
 }

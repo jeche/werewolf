@@ -1,19 +1,14 @@
 package edu.wm.werewolf.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import javax.swing.Timer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import edu.wm.werewolf.HomeController;
 import edu.wm.werewolf.dao.IGameDAO;
 import edu.wm.werewolf.dao.IKillDAO;
 import edu.wm.werewolf.dao.IPlayerDAO;
@@ -33,7 +28,6 @@ public class GameService {
 	@Autowired private IKillDAO killDAO;
 	@Autowired private IGameDAO gameDAO;
 	@Autowired private IVoteDAO voteDAO;
-//	final private int DEFAULT_GAME_TIME = 15000;
 	final private double DEFAULT_KILL_RANGE = 15000;
 	final private double DEFAULT_SCENT_RANGE = 15000;
 	final private int KILL_POINTS = 2;
@@ -103,12 +97,12 @@ public class GameService {
 		playerUpdateList.add(player.getId());
 	}
 
-	public void voteKill(String name) {
-		// TODO Auto-generated method stub
+	public boolean voteKill(String name) {
+		// Sets player to dead using a vote
 		Player player = playerDAO.getPlayerByID(name);
 		player.setDead(true);
 		playerDAO.update(player);
-		
+		return isOver();
 	}
 
 	// Creates a new game.
@@ -178,6 +172,7 @@ public class GameService {
 			for(int i = 0; i < pList.size(); i++) {
 				user = userDAO.getUserByUsername(pList.get(i).getUserId());
 				user.setScore(user.getScore() + pList.get(i).getScore());
+				userDAO.update(user);
 			}
 			isRunning = false;
 			return true;
@@ -202,5 +197,12 @@ public class GameService {
 			playerUpdateList = new ArrayList<String>();
 		}
 		return true;
+	}
+
+	public void endGame() {
+		gameDAO.removeGame();
+		playerDAO.clearPlayers();
+		voteDAO.clearVotes();
+		isRunning = false;
 	}
 }
