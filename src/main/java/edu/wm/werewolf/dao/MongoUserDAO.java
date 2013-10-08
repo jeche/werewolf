@@ -32,7 +32,7 @@ public class MongoUserDAO implements IUserDAO {
 		document.put("password", user.getHashedPassword());
 		document.put("first", user.getFirstName());
 		document.put("last", user.getLastName());
-		document.put("username", user.getLastName());
+		document.put("username", user.getUsername());
 		document.put("img", user.getImageURL());
 		table.insert(document);
 	}

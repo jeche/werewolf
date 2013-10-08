@@ -21,22 +21,30 @@
 <div id="accordion">
 <h3>Kill</h3>
 <div>
-<form action="/werewolf/players/kill" method="post">
+<form action="/players/kill" method="post">
 Victim: <input type="text" name="victim"><br>
 <input type="submit" value="Submit">
 </form> 
 </div>
 <h3>Vote</h3>
 <div>
-<form action="/werewolf/players/vote" method="post">
+<form action="/players/vote" method="post">
 Vote for: <input type="text" name="voted"><br>
 <input type="submit" value="Submit">
 </form> 
 </div>
-<h3>Section 3</h3>
+<h3>Scent</h3>
 <div>
-<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
-Quisque lobortis.Phasellus pellentesque purus in massa.</p>
+<button type="button" onclick="proceed();">do</button> 
+<script>
+function proceed () {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', 'http://google.com');
+    form.style.display = 'hidden';
+    document.body.appendChild(form)
+    form.submit();
+}</script>
 <ul>
 <li>List item one</li>
 <li>List item two</li>
