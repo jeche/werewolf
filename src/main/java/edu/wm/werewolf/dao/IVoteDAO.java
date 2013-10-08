@@ -9,4 +9,5 @@ public interface IVoteDAO {
 
 	void addVote(Vote vote);
 	public List<Vote> mostVotes(long l);
+	void clearVotes();
 }

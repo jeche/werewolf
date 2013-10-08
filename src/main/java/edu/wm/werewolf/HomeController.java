@@ -177,7 +177,7 @@ public class HomeController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/welcome", method=RequestMethod.GET)
+	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String home(ModelMap model, Principal principal) {
 		System.out.println(principal.getName());
 		System.out.println(principal.toString());

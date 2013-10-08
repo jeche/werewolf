@@ -71,5 +71,12 @@ public class MongoVoteDAO implements IVoteDAO {
 		}
 		return voteList;
 	}
+
+	@Override
+	public void clearVotes() {
+		// TODO Auto-generated method stub
+		DBCollection table = db.getCollection("Vote");
+		table.drop();
+	}
 	
 }

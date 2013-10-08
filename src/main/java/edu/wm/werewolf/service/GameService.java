@@ -115,6 +115,7 @@ public class GameService {
 	public void newGame(long gameTime) {
 		gameDAO.removeGame();
 		playerDAO.clearPlayers();
+		voteDAO.clearVotes();
 		game = new Game(gameTime, (new Date()).getTime());
 		isRunning = true;
 		List<WerewolfUser> users = userDAO.getAllUsers();
