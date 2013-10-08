@@ -44,7 +44,8 @@ function proceed () {
     form.style.display = 'hidden';
     document.body.appendChild(form)
     form.submit();
-}</script>
+}
+</script>
 <ul>
 <li>List item one</li>
 <li>List item two</li>

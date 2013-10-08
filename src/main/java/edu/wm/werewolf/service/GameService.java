@@ -157,7 +157,7 @@ public class GameService {
 		if(playerDAO.numWolves() >= playerDAO.numTown() || playerDAO.numWolves() == 0) {
 			List<Player> pList = playerDAO.getAllPlayers();
 			WerewolfUser user;
-			for(int i = 0; i <pList.size(); i++) {
+			for(int i = 0; i < pList.size(); i++) {
 				user = userDAO.getUserByUsername(pList.get(i).getUserId());
 				user.setScore(user.getScore() + pList.get(i).getScore());
 			}
