@@ -28,19 +28,19 @@ Victim: <input type="text" name="victim"><br>
 </div>
 <h3>Vote</h3>
 <div id="images">
-<form action="/werewolf/players/vote" method="post" id="form_id">
+<form action="/players/vote" method="post" id="form_id">
 <select id="voted" name="voted" size="4"></select><br>
 <input type="submit" value="Submit">
 </form> 
 </div>
 <h3>Scent</h3>
 <div>
-<form action="/werewolf/players/kill" method="post">
+<form action="/players/kill" method="post">
 <select id="victim" name="victim" size="4"></select><br>
 <input type="submit" value="Attack">
 </form> 
 <script>
-$.getJSON("/werewolf/players/scent", function(data) {
+$.getJSON("/players/scent", function(data) {
 	var $victim =  $("#victim");
 	$victim.empty();
 	$.each(data, function(id, Player) {
@@ -59,7 +59,7 @@ $.getJSON("/werewolf/players/scent", function(data) {
 </script>
 
 <script>
-$.getJSON("/werewolf/players/all", function(data) {
+$.getJSON("/players/all", function(data) {
 	var $voted =  $("#voted");
 	$voted.empty();
 	$.each(data, function(id, Player) {
