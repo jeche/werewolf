@@ -1,16 +1,11 @@
 import requests
+from requests.auth import HTTPBasicAuth
  
 # Specify the url
-url = 'http://localhost:8080/werewolf/addUser'
-data = "hi"
+url = 'http://secure-lake-6285.herokuapp.com/addUser'
+payload = {'userName': 'tester', 'id': 'tester', 'firstName':'tester', 'lastName':'tester', 'hashedPassword': 'tester'}
 # This packages the request (it doesn't make it)
-request = urllib2.Request(url, data)
-
-# Sends the request and catches the response
-response = urllib2.urlopen(request)
- 
-# Extracts the response
-html = response.read()
+request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
  
 # Print it out
-print html 
+print request.json()

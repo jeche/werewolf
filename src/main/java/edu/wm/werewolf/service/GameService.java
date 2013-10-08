@@ -168,8 +168,6 @@ public class GameService {
 		if(!werewolf.isWerewolf() || werewolf.isDead()) {
 			return null;
 		}
-/*		assert(werewolf.isWerewolf());
-		assert(game.isNight());*/
 		return playerDAO.nearPlayers(werewolf, DEFAULT_SCENT_RANGE);
 	}
 	
