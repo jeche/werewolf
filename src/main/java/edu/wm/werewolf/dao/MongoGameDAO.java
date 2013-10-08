@@ -27,7 +27,7 @@ public class MongoGameDAO implements IGameDAO {
 //		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Game");
 		BasicDBObject query = (BasicDBObject) table.findOne();
-		Game game = new Game((int)query.get("freq"), (long)query.get("create"));
+		Game game = new Game((long)query.get("freq"), (long)query.get("create"));
 		return game;
 	}
 	

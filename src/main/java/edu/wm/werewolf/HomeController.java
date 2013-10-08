@@ -63,7 +63,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/newgame", method = {RequestMethod.POST})
-	public String newGame(@RequestParam("dayNight") int dayNight, Model model) {
+	public String newGame(@RequestParam("dayNight") long dayNight, Model model) {
 		dayNight *= 60000;
 		logger.info("Starting new game with time interval: " + dayNight);
 		try {
@@ -112,10 +112,13 @@ public class HomeController {
 	@RequestMapping(value = "/players/vote", method=RequestMethod.POST)
 	public @ResponseBody boolean voteForPlayer(@RequestParam("voted") String voted, Principal principal)
 	{
-		WerewolfUser voter = userDAO.getUserByUsername(principal.getName());
+		System.out.println("voted " + voted);
+		
 		try {
+			WerewolfUser voter = userDAO.getUserByUsername(principal.getName());
 			return gameService.vote(voter.getId(), voted);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -131,22 +134,42 @@ public class HomeController {
 			e.printStackTrace();
 			return false;
 		}
-//		Player killer = gameService.getPlayerByID(id);
-//		String killerID = killer.getId();
-//		Player victim = gameService.getPlayerByID(vId);
-//		if(killer.isWerewolf() == true)
-//		{
-//			gameService.setDead(victim, killer);
-//			return true;
-//		}
-		/*String victimID = victim.getId();
-		Date day = new Date();
-		Kill kill = new Kill();
-		kill.setKillerID(killerID);
-		kill.setVictimID(victimID);
-		kill.setTimestampDate(day);
-		kill.setLat(killer.getLat());
-		kill.setLng(killer.getLng());*/
+	}
+	
+	@RequestMapping(value = "/players/scent", method=RequestMethod.GET)
+	public @ResponseBody List<Player> scent(Principal principal) {
+		try {
+		WerewolfUser user = userDAO.getUserByUsername(principal.getName());
+		List<Player> players = gameService.scent(user.getId());
+		if(players == null) {
+			players= new ArrayList<Player>();
+			Player player = new Player("NOT A WEREWOLF", false, 0, 0, "NOT A WEREWOLF", false);
+			players.add(player);
+			return players;
+			
+		}
+		List<Player> killplayers = gameService.killable(user.getId());
+		for(int i = 0; i < players.size(); i++) {
+			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))) {
+				players.get(i).setScore(1);
+			}
+			else{
+			players.get(i).setScore(0);
+			}
+			if(players.get(i).isWerewolf()) {
+				players.get(i).setScore(2);
+			}
+			players.get(i).setLat(0);
+			players.get(i).setLng(0);
+			players.get(i).setVotedAgainst(null);
+			players.get(i).setWerewolf(false);
+			players.get(i).setUserId(null);
+		}
+		return players;
+		} catch (Exception e){
+			return null;
+		}
+		
 	}
 	
 	@RequestMapping(value = "/location", method=RequestMethod.POST)
@@ -210,10 +233,18 @@ public class HomeController {
 	public void timeIteration()
 	{
 		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight()) {
-			logger.info("Going to get the most votes for day " + (int)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
-			List<Vote> voteList = voteDAO.mostVotes((int)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
+			
+			logger.info("Going to get the most votes for day " + ((long)(new Date()).getTime() - gameService.getGame().getTimer()) / (gameService.getGame().getDayNightFreq()*2));
+			List<Vote> voteList = voteDAO.mostVotes((long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
 			logger.info("Vote List: " + voteList.toString());
-			gameService.checkLocationUpdates();
+			/*gameService.checkLocationUpdates();*/
+			wasDay = false;
+		}
+		if(gameService.getGame()!=null && !wasDay && !gameService.getGame().isNight()) {
+			wasDay = true;
+		}
+		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 180000) == 0){
+			
 		}
 	}
 	

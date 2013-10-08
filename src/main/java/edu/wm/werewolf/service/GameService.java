@@ -18,6 +18,7 @@ import edu.wm.werewolf.dao.IGameDAO;
 import edu.wm.werewolf.dao.IKillDAO;
 import edu.wm.werewolf.dao.IPlayerDAO;
 import edu.wm.werewolf.dao.IUserDAO;
+import edu.wm.werewolf.dao.IVoteDAO;
 import edu.wm.werewolf.exceptions.PlayerAlreadyExistsException;
 import edu.wm.werewolf.model.GPSLocation;
 import edu.wm.werewolf.model.Game;
@@ -31,7 +32,8 @@ public class GameService {
 	@Autowired private IUserDAO userDAO;
 	@Autowired private IKillDAO killDAO;
 	@Autowired private IGameDAO gameDAO;
-	final private int DEFAULT_GAME_TIME = 15000;
+	@Autowired private IVoteDAO voteDAO;
+//	final private int DEFAULT_GAME_TIME = 15000;
 	final private double DEFAULT_KILL_RANGE = 15000;
 	final private double DEFAULT_SCENT_RANGE = 15000;
 	final private int KILL_POINTS = 2;
@@ -79,6 +81,13 @@ public class GameService {
 		return true;
 	}
 	
+	public List<Player> killable(String killer)
+	{
+		Player killerDB = playerDAO.getPlayerByID(killer);
+		List<Player> killable = playerDAO.nearPlayers(killerDB, DEFAULT_KILL_RANGE);
+		return killable;
+	}
+	
 	public List<Player> getAllPlayers() 
 	{
 		return playerDAO.getAllPlayers();
@@ -103,10 +112,10 @@ public class GameService {
 	}
 
 	// Creates a new game.
-	public void newGame(int gameTime) {
+	public void newGame(long gameTime) {
 		gameDAO.removeGame();
 		playerDAO.clearPlayers();
-		game = new Game(DEFAULT_GAME_TIME, (new Date()).getTime());
+		game = new Game(gameTime, (new Date()).getTime());
 		isRunning = true;
 		List<WerewolfUser> users = userDAO.getAllUsers();
 		if(users.size() - 1 == 0) {
@@ -136,10 +145,17 @@ public class GameService {
 
 	public boolean vote(String voter, String voted) {
 		Player player = playerDAO.getPlayerByID(voter);
+//		if(game == null) {
+		game = gameDAO.getGame();
 		if(game.isNight() || player.isDead() || !playerDAO.getAllAlive().contains(playerDAO.getPlayerByID(voted))) {
+			logger.info("Failed normal checks");
+			logger.info("Is night? " + game.isNight());
+			logger.info("Dead man voting? " + player.isDead());
+			logger.info("Voting for dead man? " + !playerDAO.getAllAlive().contains(playerDAO.getPlayerByID(voted)));
 			return false;
 		}
-		Vote vote = new Vote(voted, 1);
+		Vote vote = new Vote(voted, 1, game.getDayNightFreq());
+		voteDAO.addVote(vote);
 		player.setVotedAgainst(voted);
 		playerDAO.update(player);
 		return true;
@@ -148,8 +164,11 @@ public class GameService {
 	public List<Player> scent(String userId){
 		WerewolfUser user = userDAO.getUserByUsername(userId);
 		Player werewolf = playerDAO.getPlayerByID(user.getId());
-		assert(werewolf.isWerewolf());
-		assert(game.isNight());
+		if(!werewolf.isWerewolf() || werewolf.isDead()) {
+			return null;
+		}
+/*		assert(werewolf.isWerewolf());
+		assert(game.isNight());*/
 		return playerDAO.nearPlayers(werewolf, DEFAULT_SCENT_RANGE);
 	}
 	
@@ -168,7 +187,7 @@ public class GameService {
 	}
 
 	public Game getGame() {
-		// TODO Auto-generated method stub
+		game = gameDAO.getGame();
 		return game;
 	}
 	

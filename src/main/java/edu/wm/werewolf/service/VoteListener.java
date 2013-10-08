@@ -15,11 +15,11 @@ public class VoteListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		List<Vote> voteList = new ArrayList<Vote>();
+/*		List<Vote> voteList = new ArrayList<Vote>();
 		List<Player> playerList = gameService.getAllAlive();
 		Vote vote;
 		for(int i = 0; i < playerList.size(); i++) {
-			vote = new Vote(playerList.get(i).getVotedAgainst(), 1);
+//			vote = new Vote(playerList.get(i).getVotedAgainst(), 1);
 			if(voteList.contains(vote)) {
 				voteList.get(voteList.indexOf(vote)).setNumVotes(voteList.get(voteList.indexOf(vote)).getNumVotes() + 1);
 			}
@@ -43,7 +43,7 @@ public class VoteListener implements ActionListener {
 		for(int k = 0; k < voteList.size(); k++) {
 			gameService.voteKill(voteList.get(k).getName());
 		}
-	}
+//	}}*/
 	}
 	}
 

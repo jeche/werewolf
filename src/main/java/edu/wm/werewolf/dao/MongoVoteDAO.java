@@ -22,7 +22,7 @@ public class MongoVoteDAO implements IVoteDAO {
 	@Override
 	public void addVote(Vote vote) {
 //		db = mongo.getDB("werewolf");
-		DBCollection table = db.getCollection("Player");
+		DBCollection table = db.getCollection("Vote");
 		BasicDBObject document = new BasicDBObject();
 		document.put("player", vote.getName());
 		document.put("day", vote.getCreatedDate());
@@ -39,9 +39,9 @@ public class MongoVoteDAO implements IVoteDAO {
 		}
 	}
 	
-	public List<Vote> mostVotes(int day) {
+	public List<Vote> mostVotes(long day) {
 //		db = mongo.getDB("werewolf");
-		DBCollection table = db.getCollection("Player");
+		DBCollection table = db.getCollection("Vote");
 		BasicDBObject document = new BasicDBObject();
 		document.put("day", day);
 		DBCursor cursor = table.find(document);
@@ -50,8 +50,13 @@ public class MongoVoteDAO implements IVoteDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			voted = new Vote((String) item.get("player"),(int) item.get("votes"));
-			voteList.add(voted.getNumVotes(), voted);
+			voted = new Vote((String) item.get("player"),(int) item.get("votes"), 1);
+			if(voted.getNumVotes() > voteList.size()) {
+				voteList.add(voteList.size(), voted);
+			}
+			else {
+				voteList.add((int)voted.getNumVotes(), voted);
+			}
 		}
 		}
 		finally {

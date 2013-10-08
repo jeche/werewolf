@@ -27,24 +27,48 @@ Victim: <input type="text" name="victim"><br>
 </form> 
 </div>
 <h3>Vote</h3>
-<div>
-<form action="/players/vote" method="post">
-Vote for: <input type="text" name="voted"><br>
+<div id="images">
+<form action="/werewolf/players/vote" method="post" id="form_id">
+<select id="voted" name="voted" size="4"></select><br>
 <input type="submit" value="Submit">
 </form> 
 </div>
 <h3>Scent</h3>
 <div>
-<button type="button" onclick="proceed();">do</button> 
+<form action="/werewolf/players/kill" method="post">
+<select id="victim" name="victim" size="4"></select><br>
+<input type="submit" value="Attack">
+</form> 
 <script>
-function proceed () {
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', 'http://google.com');
-    form.style.display = 'hidden';
-    document.body.appendChild(form)
-    form.submit();
-}
+$.getJSON("/werewolf/players/scent", function(data) {
+	var $victim =  $("#victim");
+	$victim.empty();
+	$.each(data, function(id, Player) {
+		if(Player.score == 0){
+		$victim.append($('<option value="'+Player.id+'">' + Player.id + '</option>'));}
+		else if(Player.score == 2 ){
+			$victim.append($('<option value="'+Player.id+'">' + Player.id + ' smells gross. </option>'));
+		}
+		else{
+			$victim.append($('<option value="'+Player.id+'">' + Player.id + ' fresh blood. </option>'));
+		}
+
+	});
+});
+
+</script>
+
+<script>
+$.getJSON("/werewolf/players/all", function(data) {
+	var $voted =  $("#voted");
+	$voted.empty();
+	$.each(data, function(id, Player) {
+
+		$voted.append($('<option value="'+Player.id+'">' + Player.id + '</option>'));
+
+	});
+});
+
 </script>
 <ul>
 <li>List item one</li>

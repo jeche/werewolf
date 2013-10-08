@@ -7,17 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.wm.werewolf.service.GameService;
 
 public class Vote {
-	@Autowired GameService gameService;
 	private String name; //votedAgainst
 	private int numVotes;
 	private long creationDate;
-	public Vote(String name, int numVotes) {
+	public Vote(String name, int numVotes, long dayNightFreq) {
 		super();
 		this.name = name;
 		this.numVotes = numVotes;
 		Date date = new Date();
 		creationDate = date.getTime();
-		creationDate = creationDate/(gameService.getGame().getDayNightFreq() * 2 );
+		creationDate = creationDate/(dayNightFreq * 2 );
 	}
 	/**
 	 * @return the creation date

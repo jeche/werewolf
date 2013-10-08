@@ -8,5 +8,5 @@ import edu.wm.werewolf.model.WerewolfUser;
 public interface IVoteDAO {
 
 	void addVote(Vote vote);
-	public List<Vote> mostVotes(int day);
+	public List<Vote> mostVotes(long l);
 }

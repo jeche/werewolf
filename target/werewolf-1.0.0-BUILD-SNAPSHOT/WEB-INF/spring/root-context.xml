@@ -14,7 +14,7 @@
 	    <!-- create db object by calling getDB on mongo bean -->
 <context:property-placeholder/>
     <bean id="mongo" class="com.mongodb.MongoURI">
-      <constructor-arg value="${MONGOHQ_URL}"/>
+      <constructor-arg value="mongodb://werewolf:werewolf@widmore.mongohq.com:10010/werewolf"/>
     </bean>
     
         <!-- create db object by calling getDB on mongo bean -->
@@ -22,21 +22,7 @@
       <property name="targetObject"><ref local="mongo"/></property>
       <property name="targetMethod"><value>connectDB</value></property>
     </bean>  
- 
-    <!-- call authenticate on db object -->
-    <bean id="authenticateDB"
-        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject"><ref local="db" /></property>
-        <property name="targetMethod">
-            <value>authenticate</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>#{ @mongo.getUsername() }</value>
-                <value>#{ @mongo.getPassword() }</value>
-            </list>
-        </property>
-    </bean>
+
 	<bean id="playerDAO" class="edu.wm.werewolf.dao.MongoPlayerDAO"></bean>
 	<task:executor id="myExecutor" pool-size="5"/>
 	<task:scheduler id="myScheduler" pool-size="10"/>

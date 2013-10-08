@@ -21,10 +21,10 @@
 <div id="accordion">
 <h3>Add a User</h3>
 <div>
-<form action="/werewolf/addUser" method="post">
+<form action="/addUser" method="post">
 First name: <input type="text" name="firstName"><br>
 Last name: <input type="text" name="lastName"><br>
-Password: <input type="text" name="hashedPassword"><br>
+Password: <input type="password" name="hashedPassword"><br>
 User name: <input type="text" name="userName"><br>
 ID: <input type="text" name="id"><br>
 <input type="submit" value="Submit">
@@ -32,7 +32,7 @@ ID: <input type="text" name="id"><br>
 </div>
 <h3>Edit a game</h3>
 <div>
-<form action="/werewolf/newgame" method="post">
+<form action="/newgame" method="post">
 Day Night Frequency: <input type="text" name="dayNight"><br>
 <input type="submit" value="Submit">
 </form> 
