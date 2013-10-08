@@ -155,7 +155,7 @@ public class GameService {
 			logger.info("Voting for dead man? " + !playerDAO.getAllAlive().contains(playerDAO.getPlayerByID(voted)));
 			return false;
 		}
-		Vote vote = new Vote(voted, 1, game.getDayNightFreq());
+		Vote vote = new Vote(voted, 1, game.getDayNightFreq(), game.getTimer());
 		voteDAO.addVote(vote);
 		player.setVotedAgainst(voted);
 		playerDAO.update(player);

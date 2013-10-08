@@ -10,13 +10,13 @@ public class Vote {
 	private String name; //votedAgainst
 	private int numVotes;
 	private long creationDate;
-	public Vote(String name, int numVotes, long dayNightFreq) {
+	public Vote(String name, int numVotes, long dayNightFreq, long gameStart) {
 		super();
 		this.name = name;
 		this.numVotes = numVotes;
 		Date date = new Date();
 		creationDate = date.getTime();
-		creationDate = creationDate/(dayNightFreq * 2 );
+		creationDate = (creationDate - gameStart)/(dayNightFreq * 2 );
 	}
 	/**
 	 * @return the creation date

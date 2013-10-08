@@ -50,7 +50,7 @@ public class MongoVoteDAO implements IVoteDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			voted = new Vote((String) item.get("player"),(int) item.get("votes"), 1);
+			voted = new Vote((String) item.get("player"),(int) item.get("votes"), 1, 1);
 			if(voted.getNumVotes() > voteList.size()) {
 				voteList.add(voteList.size(), voted);
 			}
