@@ -69,6 +69,9 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		document.put("votedAgainst", updated.getVotedAgainst());
 		document.put("isWerewolf", updated.isWerewolf());
 		document.put("isDead", updated.isDead());
+		if(updated.isDead()) {
+			System.out.println("CRAPPPPP" + updated.getId().toString());
+		}
 		table.save(document);
 		DBObject index2d = BasicDBObjectBuilder.start("loc", "2d").get();
 		System.out.println(index2d);
