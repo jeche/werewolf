@@ -8,7 +8,7 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
   <http use-expressions="true">
   <intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
-  <logout invalidate-session="true"   logout-success-url="/welcome"  logout-url="/logout"/>
+  <logout invalidate-session="true" logout-success-url="/welcome"  logout-url="/logout"/>
   <http-basic />
   </http>
 

@@ -44,10 +44,10 @@ public class MongoUserDAO implements IUserDAO {
 		DBCollection table = db.getCollection("User");
 		BasicDBObject query = new BasicDBObject();
 		query.put("username", username);
-		DBCursor cur = table.find();
-		while(cur.hasNext()) {
-			System.out.println(cur.next());
-		}
+//		DBCursor cur = table.find();
+//		while(cur.hasNext()) {
+//			System.out.println(cur.next());
+//		}
 		DBObject cursor = table.findOne(query);
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
@@ -56,7 +56,7 @@ public class MongoUserDAO implements IUserDAO {
 			System.out.println("Shoot");
 			return null;}
 		WerewolfUser user = new WerewolfUser((String)cursor.get("_id"), (String)cursor.get("first"), (String)cursor.get("lastName"), username, (String)cursor.get("password"), (String)cursor.get("imageURL"));
-		if((boolean)cursor.get("isAdmin")) {
+		if(cursor.get("isAdmin") != null && (boolean)cursor.get("isAdmin")) {
 			user.setAdmin(true);
 		}
 		return user;
