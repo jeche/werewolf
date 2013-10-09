@@ -42,6 +42,7 @@ public class MongoUserDAO implements IUserDAO {
 	{
 		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("User");
+		System.out.println(db.getCollectionNames().toString());
 		BasicDBObject query = new BasicDBObject("username", username);
 		System.out.println(username);
 		System.out.println(table.find().toString());
