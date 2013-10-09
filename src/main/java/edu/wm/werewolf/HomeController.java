@@ -194,7 +194,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/admin", method=RequestMethod.GET)
-	public String admin(ModelMap model) {
+	public String admin(ModelMap model, Principal principal) {
 		return "admin";
 	}
 	

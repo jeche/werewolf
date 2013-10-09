@@ -43,11 +43,11 @@ public class MongoUserDAO implements IUserDAO {
 		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("User");
 		BasicDBObject query = new BasicDBObject("username", username);
+		System.out.println(username);
 		DBObject cursor = table.findOne(query);
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
 		//TODO: Fix to allow users to be set as admins
-		
 		if(cursor == null) {
 			System.out.println("Shoot");
 			return null;}
