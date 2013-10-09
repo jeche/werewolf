@@ -42,10 +42,11 @@ public class MongoUserDAO implements IUserDAO {
 	{
 		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("User");
-		System.out.println(db.getCollectionNames().toString());
 		BasicDBObject query = new BasicDBObject("username", username);
-		System.out.println(username);
-		System.out.println(table.find().toString());
+		DBCursor cur = table.find();
+		while(cur.hasNext()) {
+			System.out.println(cur.next());
+		}
 		DBObject cursor = table.findOne(query);
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
