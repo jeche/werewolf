@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserDetailsService, IUserService {
 			user = userDAO.getUserByUsername(username);
 		}
 		if(user == null && !username.equals("admin")) {
+			System.out.println("Grabbed null user.");
 			return null;
 		}
 		logger.info(user.toString());
