@@ -44,6 +44,7 @@ public class MongoUserDAO implements IUserDAO {
 		DBCollection table = db.getCollection("User");
 		BasicDBObject query = new BasicDBObject("username", username);
 		System.out.println(username);
+		System.out.println(table.find().toString());
 		DBObject cursor = table.findOne(query);
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
