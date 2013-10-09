@@ -19,6 +19,7 @@ public class WerewolfUser{
 	private String hashedPassword;
 	private String imageURL;
 	private int score;
+	private boolean isAdmin;
 	
 	public WerewolfUser(String id, String firstName, String lastName, String username,
 			String hashedPassword, String imageURL){
@@ -33,6 +34,7 @@ public class WerewolfUser{
 		this.uId = username;
 		this.hashedPassword = hashedPassword;
 		this.imageURL = imageURL;
+		this.isAdmin = false;
 		
 	}
 	public String getId() {
@@ -159,5 +161,17 @@ public class WerewolfUser{
 				+ lastName + ", username=" + uId + ", hashedPassword="
 				+ hashedPassword + ", imageURL=" + imageURL + ", score="
 				+ score + "]";
+	}
+	/**
+	 * @return the isAdmin
+	 */
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	/**
+	 * @param isAdmin the isAdmin to set
+	 */
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

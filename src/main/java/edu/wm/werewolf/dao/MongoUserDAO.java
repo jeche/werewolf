@@ -34,6 +34,7 @@ public class MongoUserDAO implements IUserDAO {
 		document.put("last", user.getLastName());
 		document.put("username", user.getUsername());
 		document.put("img", user.getImageURL());
+		document.put("isAdmin", user.isAdmin());
 		table.insert(document);
 	}
 	
@@ -51,7 +52,9 @@ public class MongoUserDAO implements IUserDAO {
 			System.out.println("Shoot");
 			return null;}
 		WerewolfUser user = new WerewolfUser((String)cursor.get("_id"), (String)cursor.get("first"), (String)cursor.get("lastName"), username, (String)cursor.get("password"), (String)cursor.get("imageURL"));
-		
+		if((boolean)cursor.get("isAdmin")) {
+			user.setAdmin(true);
+		}
 		return user;
 	}
 
@@ -89,6 +92,7 @@ public class MongoUserDAO implements IUserDAO {
 		document.put("last", user.getLastName());
 		document.put("username", user.getUsername());
 		document.put("img", user.getImageURL());
+		document.put("isAdmin", user.isAdmin());
 		table.save(document);
 	}
 

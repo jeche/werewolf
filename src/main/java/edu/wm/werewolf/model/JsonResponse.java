@@ -17,4 +17,17 @@ public class JsonResponse {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public JsonResponse(String status) {
+		super();
+		this.status = status;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "JsonResponse [status=" + status + "]";
+	}
 }

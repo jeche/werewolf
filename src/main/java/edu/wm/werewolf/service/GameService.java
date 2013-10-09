@@ -71,6 +71,8 @@ public class GameService {
 		// Gotten past kill checks
 		killDAO.createKill(victimDB, killerDB);
 		killerDB.setScore((killerDB.getScore() + KILL_POINTS));
+		victimDB.setDead(true);
+		playerDAO.update(victimDB);
 		playerDAO.update(killerDB);
 		return true;
 	}

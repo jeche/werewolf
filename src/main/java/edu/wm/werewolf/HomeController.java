@@ -63,17 +63,17 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/newgame", method = {RequestMethod.POST})
-	public String newGame(@RequestParam("dayNight") long dayNight, Model model) {
+	public @ResponseBody JsonResponse newGame(@RequestParam("dayNight") long dayNight, Model model) {
 		dayNight *= 60000;
+		JsonResponse response = new JsonResponse("success");
 		logger.info("Starting new game with time interval: " + dayNight);
 		try {
 			gameService.newGame(dayNight);
 			wasDay = true;
 		} catch (Exception e) {
-			// TODO: handle exception
-			return e.toString();
+			response.setStatus("failure;\n" + e.getStackTrace().toString());
 		}
-		return "Success";
+		return response;
 	}
 	
 	@RequestMapping(value = "/players/alive", method=RequestMethod.GET)
@@ -183,8 +183,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String home(ModelMap model, Principal principal) {
-		System.out.println(principal.getName());
-		System.out.println(principal.toString());
 		return "home";
 	}
 	
@@ -236,7 +234,7 @@ public class HomeController {
 	
 	public void timeIteration()
 	{
-		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight()) {
+		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight() && (long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2) != 0 ) {
 			
 			logger.info("Going to get the most votes for day " + ((long)(new Date()).getTime() - gameService.getGame().getTimer()) / (gameService.getGame().getDayNightFreq()*2));
 			List<Vote> voteList = voteDAO.mostVotes((long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
@@ -246,14 +244,13 @@ public class HomeController {
 					gameService.endGame();
 				}
 			}
-			/*gameService.checkLocationUpdates();*/
 			wasDay = false;
 		}
 		if(gameService.getGame()!=null && !wasDay && !gameService.getGame().isNight()) {
 			wasDay = true;
 		}
 		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 180000) == 0){
-			
+			gameService.checkLocationUpdates();
 		}
 	}
 	
