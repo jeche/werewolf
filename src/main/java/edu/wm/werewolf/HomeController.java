@@ -176,7 +176,7 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value = "/player/location", method=RequestMethod.POST)
+	@RequestMapping(value = "/players/location", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setLocation(@RequestParam("lng") double lng, @RequestParam("lat") double lat, Principal principal) {
 		JsonResponse response = new JsonResponse("Success");
 		try {
@@ -216,11 +216,24 @@ public class HomeController {
 		return "admin";
 	}
 	
+	@RequestMapping(value = "/admin/test", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse testGame(Principal principal){
+		JsonResponse response = new JsonResponse("success");
+		try {
+			userDAO.clearUsers();
+			gameService.newGameTest(1);
+		}catch(Exception e) {
+			response.setStatus("failure;\n" + e.getStackTrace().toString());
+		}
+		return response;
+	}
+	
 	@RequestMapping(value = "/addUser", method=RequestMethod.POST)
-	public @ResponseBody String addUser(@RequestParam("userName")String username, @RequestParam("id")String id,
+	public @ResponseBody JsonResponse addUser(@RequestParam("userName")String username, @RequestParam("id")String id,
 			@RequestParam("firstName")String firstName, @RequestParam("lastName")String lastName,
 			@RequestParam("hashedPassword")String hashedPassword, Principal principal)
 	{
+		JsonResponse response = new JsonResponse("success");
 		principal.getName();
 		String imageURL = "";
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
@@ -231,16 +244,9 @@ public class HomeController {
 			userDAO.createUser(user);
 		} catch (Exception e) {
 			// TODO: handle exception
-			return "Failure";
+			response.setStatus("failure);" + e.getStackTrace().toString());
 		}
-		return "Success";
-	}
-	
-	@RequestMapping(value = "/restartGame", method=RequestMethod.GET)
-	public boolean restartGame()
-	{
-		gameService.newGame(0);
-		return true;
+		return response;
 	}
 	
 	@RequestMapping(value = "/players/getVotable", method=RequestMethod.GET)

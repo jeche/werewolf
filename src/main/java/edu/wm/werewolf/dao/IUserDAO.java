@@ -10,4 +10,5 @@ public interface IUserDAO {
 	WerewolfUser getUserByUsername(String username);
 	List<WerewolfUser> getAllUsers();
 	void update(WerewolfUser user);
+	void clearUsers();
 }

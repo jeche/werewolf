@@ -136,6 +136,34 @@ public class GameService {
 		}
 		gameDAO.createGame(game);
 	}
+	
+	public void newGameTest(long gameTime) {
+		gameDAO.removeGame();
+		playerDAO.clearPlayers();
+		voteDAO.clearVotes();
+		game = new Game(gameTime, (new Date()).getTime());
+		isRunning = true;
+		List<WerewolfUser> users = userDAO.getAllUsers();
+		if(users.size() - 1 == 0) {
+			isRunning = false;
+			game = null;
+			return;
+		}
+		boolean isWerewolf;
+		int j = (users.size() - 1)/ 10 * 3;
+		for(int i = 0; i < users.size(); i++)
+		{
+			if(!users.get(i).getUsername().equals("admin")) {
+				isWerewolf = false;
+				if(users.get(i).getUsername().equals("atjones")) {
+					isWerewolf = true;
+				}
+				// Original locations set to 0
+				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf, false));
+			}
+		}
+		gameDAO.createGame(game);
+	}
 
 	public boolean vote(String voter, String voted) {
 		Player player = playerDAO.getPlayerByID(voter);

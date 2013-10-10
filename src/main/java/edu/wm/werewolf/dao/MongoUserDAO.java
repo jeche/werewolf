@@ -100,4 +100,11 @@ public class MongoUserDAO implements IUserDAO {
 		table.save(document);
 	}
 
+	@Override
+	public void clearUsers() {
+		// TODO Auto-generated method stub
+		DBCollection table = db.getCollection("User");
+		table.drop();
+	}
+
 }
