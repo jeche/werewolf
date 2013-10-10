@@ -176,7 +176,7 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value = "/location", method=RequestMethod.POST)
+	@RequestMapping(value = "/player/location", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setLocation(@RequestParam("lng") double lng, @RequestParam("lat") double lat, Principal principal) {
 		JsonResponse response = new JsonResponse("Success");
 		try {
@@ -187,7 +187,8 @@ public class HomeController {
 			gameService.updatePosition(user.getId(), location);
 		} catch (Exception e) {
 			// TODO: handle exception
-			response.setStatus("Fail" + e.getStackTrace().toString());
+			response.setStatus("Fail" + e.toString());
+			e.printStackTrace();
 		}
 
 		return response;
