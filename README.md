@@ -9,10 +9,15 @@ The currently viewable links include:
 
 Post:
 + \newgame    :: starts a new game.  Must have admin credentials to do this.
-+ \
-
++ \players\location :: updates a player's location based on the post.  Requested params are both of the type double and must be passed in as 'lat' and 'lng'
++ \players\kill :: allows a werewolf to kill its specified victim.  Can only occur at night.  Requested param is of type string and must be passed in as 'victim'.
++ \players\vote :: allows a player to vote during the daytime.  Requested param is of type string and must be passed in as 'voted'.
++ 
 Get(without .jsp views)
 + \game       :: returns a boolean value of whether the game is running or not to the requester.
 + \highscores :: returns a list of WerewolfUser's scores
 + \players\getVotable
++ \players\all :: returns a list of Players.  If a game is running the list is sanitized.
++ \players\scent :: allows a werewolf to 'scent' the people nearby it.  Returns a list of players where players that are in scent but not kill range have a score of 0, those in kill range have a score of 1, and werewolves in range have a score of 2.
++ \players\alive :: returns a list of currently living players.  List is sanitized.
 
