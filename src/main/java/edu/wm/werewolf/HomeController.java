@@ -196,7 +196,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String home(ModelMap model) {
-		return "p";
+		return "home";
 	}
 	
 	@RequestMapping(value = "/player", method=RequestMethod.GET)
