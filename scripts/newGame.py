@@ -60,8 +60,8 @@ print(end)
 
 # Vote for jlchen to die.
 url = 'http://secure-lake-6285.herokuapp.com/players/vote'
-payload = {'victim': 'jlchen', 'id':'sychen', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
-print("Town is voting for " + payload['victim'])
+payload = {'voted': 'jlchen'}
+print("Town is voting for " + payload['voted'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('aablohm', 'test1'))
 print("Addition was: " + request.json()["status"])
 

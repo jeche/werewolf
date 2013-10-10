@@ -234,7 +234,7 @@ public class HomeController {
 	public @ResponseBody JsonResponse testNewGame(Principal principal){
 		JsonResponse response = new JsonResponse("success");
 		try {
-			gameService.newGameTest(1);
+			gameService.newGameTest(60000);
 		}catch(Exception e) {
 			response.setStatus("failure;\n" + e.getStackTrace().toString());
 		}
