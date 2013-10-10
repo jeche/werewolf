@@ -3,7 +3,7 @@ import time
 from requests.auth import HTTPBasicAuth
 # Clear users
 url = 'http://secure-lake-6285.herokuapp.com/admin/test'
-print("Clearing user database using and starting a new game: " + url + " credentials are admin, admin")
+print("Clearing user database of users: " + url + " credentials are admin, admin")
 request = requests.post(url, auth=HTTPBasicAuth('admin', 'admin'))
 print("Clearing was: " + request.json()["status"])
 
@@ -40,6 +40,11 @@ payload = {'userName': 'sychen', 'id':'sychen', 'firstName':'A', 'lastName':'J',
 print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
 print("Addition was: " + request.json()["status"])
+
+url = 'http://secure-lake-6285.herokuapp.com/admin/newgametest'
+print("Starting a new game: " + url + " credentials are admin, admin")
+request = requests.post(url, auth=HTTPBasicAuth('admin', 'admin'))
+print("Clearing was: " + request.json()["status"])
 
 print("atjones is always the werewolf in tests")
 

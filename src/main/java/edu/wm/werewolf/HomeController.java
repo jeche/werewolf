@@ -221,6 +221,16 @@ public class HomeController {
 		JsonResponse response = new JsonResponse("success");
 		try {
 			userDAO.clearUsers();
+		}catch(Exception e) {
+			response.setStatus("failure;\n" + e.getStackTrace().toString());
+		}
+		return response;
+	}
+	
+	@RequestMapping(value = "/admin/newgametest", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse testNewGame(Principal principal){
+		JsonResponse response = new JsonResponse("success");
+		try {
 			gameService.newGameTest(1);
 		}catch(Exception e) {
 			response.setStatus("failure;\n" + e.getStackTrace().toString());
