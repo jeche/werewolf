@@ -261,8 +261,8 @@ public class HomeController {
 		}
 		if(gameService.getGame()!=null && !wasDay && !gameService.getGame().isNight()) {
 			wasDay = true;
-		}
-		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 180000) == 0){
+		}// Players must update every 5 minutes
+		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) % 5  == 0 && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) / 5 != 0){
 			gameService.checkLocationUpdates();
 		}
 	}
