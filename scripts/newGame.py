@@ -58,6 +58,22 @@ for item in request.json():
 end = end + "all of whom are currently alive."
 print(end)
 
+print("Waiting one minute until night time to kill sychen")
+time.sleep(60)
+
+url = 'http://secure-lake-6285.herokuapp.com/players/kill'
+payload = {'victim':'sychen'}
+print("Atjones attacking sychen")
+# Makes request
+request = requests.post(url, data=payload, auth=HTTPBasicAuth('atjones', 'test1'))
+print("Moving sychen " + request.json()["status"])
+result = "sychen not found in alive players"
+for item in request.json():
+    if item["id"] == "sychen":
+	result = "failed"
+
+#time.sleep(60)
+
 # Vote for jlchen to die.
 url = 'http://secure-lake-6285.herokuapp.com/players/vote'
 payload = {'voted': 'jlchen'}
@@ -65,4 +81,16 @@ print("Town is voting for " + payload['voted'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('aablohm', 'test1'))
 print("Addition was: " + request.json()["status"])
 
-#time.sleep(60)
+# Move everyone so that they are not killed by not updating.
+url = 'http://secure-lake-6285.herokuapp.com/players/location'
+payload = {'lng': '1.0', 'lat': '0.5'}
+print("Moving everyone except jlchen so that they are not killed for lack of updating location")
+# Makes request
+request = requests.post(url, data=payload, auth=HTTPBasicAuth('aablohm', 'test1'))
+print("Moving aablohm " + request.json()["status"])
+url = 'http://secure-lake-6285.herokuapp.com/players/location'
+payload = {'lng': '1.0', 'lat': '0.5'}
+print("Moving everyone except jlchen so that they are not killed for lack of updating location")
+# Makes request
+request = requests.post(url, data=payload, auth=HTTPBasicAuth('atjones', 'test1'))
+print("Moving atjones " + request.json()["status"])

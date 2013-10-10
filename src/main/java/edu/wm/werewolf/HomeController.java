@@ -127,16 +127,19 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/players/kill", method=RequestMethod.POST)
-	public @ResponseBody boolean killPlayerById(@RequestParam("victim") String victim, Principal principal) throws NoPlayerFoundException
+	public @ResponseBody JsonResponse killPlayerById(@RequestParam("victim") String victim, Principal principal) throws NoPlayerFoundException
 	{
+		JsonResponse response = new JsonResponse("success");
 		WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 		try {
-			return gameService.kill(user.getId(), victim);
+			 if(!gameService.kill(user.getId(), victim)) {
+				 response.setStatus("failed");
+			 }
 		} catch (Exception e) {
 			logger.info("Exception thrown.");
-			e.printStackTrace();
-			return false;
+			response.setStatus("failure;" + e.getStackTrace().toString());
 		}
+		return response;
 	}
 	
 	@RequestMapping(value = "/players/scent", method=RequestMethod.GET)
