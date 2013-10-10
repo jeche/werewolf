@@ -31,18 +31,25 @@ public class UserServiceImpl implements UserDetailsService, IUserService {
 		WerewolfUser user = userDAO.getUserByUsername(username);
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
 		// TODO: Remove admin functionality
-		logger.info(user.toString());
+//		logger.info(user.toString());
 		if(user == null&& username.equals("admin")) {
+			// Ignore simply used for setup
 			userDAO.createUser(new WerewolfUser("admin", "admin", "admin", "admin", encoded.encode("admin"), "admin"));
+			user.setAdmin(true);
+			userDAO.update(user);
 			user = userDAO.getUserByUsername(username);
 		}
 		if(user == null && !username.equals("admin")) {
 			System.out.println("Grabbed null user.");
 			return null;
 		}
-		
+
 		Collection<GrantedAuthorityImpl> authorities = new ArrayList<GrantedAuthorityImpl>();
 		authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+		// remove || later after setting up database
+		if(user.isAdmin() || username.equals("admin")) {
+			authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+		}
 		return new authUser(user.getUsername(), user.getHashedPassword(), true, true, true, true, authorities);
 	}
 

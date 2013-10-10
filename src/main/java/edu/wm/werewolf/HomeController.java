@@ -195,8 +195,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
-	public String home(ModelMap model, Principal principal) {
-		return "home";
+	public String home(ModelMap model) {
+		return "p";
+	}
+	
+	@RequestMapping(value = "/player", method=RequestMethod.GET)
+	public String playerMenu(ModelMap model, Principal principal) {
+		return "player";
 	}
 	
 	@RequestMapping(value = "/logout", method=RequestMethod.GET)
@@ -245,6 +250,19 @@ public class HomeController {
 
 	}
 	
+	@RequestMapping(value = "/highscores", method=RequestMethod.GET)
+	public List<WerewolfUser> allTimeHighscoreList(){
+		List<WerewolfUser> scoreList =  userDAO.getAllUsers();
+		for(int i = 0; i < scoreList.size(); i++) {
+			scoreList.get(i).setAdmin(false);
+			scoreList.get(i).setFirstName("");
+			scoreList.get(i).setLastName("");
+			scoreList.get(i).setHashedPassword("");
+			scoreList.get(i).setImageURL("");
+		}
+		return scoreList;
+	}
+	
 	public void timeIteration()
 	{
 		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight() && (long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2) != 0 ) {
@@ -261,7 +279,7 @@ public class HomeController {
 		}
 		if(gameService.getGame()!=null && !wasDay && !gameService.getGame().isNight()) {
 			wasDay = true;
-		}// Players must update every 5 minutes
+		}// Players must update every 5 minutes, do not have to update for the first ten minutes, could be changed to fit game time
 		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) % 5  == 0 && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) / 5 != 0){
 			gameService.checkLocationUpdates();
 		}

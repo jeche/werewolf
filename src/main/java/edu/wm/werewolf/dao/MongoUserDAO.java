@@ -68,7 +68,7 @@ public class MongoUserDAO implements IUserDAO {
 		DBCollection table = db.getCollection("User");
 		DBCursor cursor = table.find();
 		WerewolfUser alive;
-		List<WerewolfUser> players = new ArrayList<>();
+		List<WerewolfUser> players = new ArrayList<WerewolfUser>();
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
 		// TODO: Fix to allow users to be set as admins

@@ -9,5 +9,5 @@ public interface IUserDAO {
 	void createUser(WerewolfUser user);
 	WerewolfUser getUserByUsername(String username);
 	List<WerewolfUser> getAllUsers();
-	void update(WerewolfUser user); 
+	void update(WerewolfUser user);
 }
