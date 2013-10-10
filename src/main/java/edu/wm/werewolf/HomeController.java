@@ -144,7 +144,7 @@ public class HomeController {
 		if(players == null) {
 			// Person making a the request is not a werewolf.
 			players= new ArrayList<Player>();
-			Player player = new Player("NOT A WEREWOLF", false, 0, 0, "NOT A WEREWOLF", false);
+			Player player = new Player("NOT A WEREWOLF", false, 0, 0, "NOT A WEREWOLF", false, false);
 			players.add(player);
 			return players;
 			

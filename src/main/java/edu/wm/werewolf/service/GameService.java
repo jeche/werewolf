@@ -32,7 +32,6 @@ public class GameService {
 	final private double DEFAULT_SCENT_RANGE = 1;
 	final private int KILL_POINTS = 2;
 	private boolean isRunning = false;
-	private List<String> playerUpdateList;
 	Timer timer;
 	Game game;
 	
@@ -95,8 +94,8 @@ public class GameService {
 		Player player = playerDAO.getPlayerByID(user.getId());
 		player.setLat(location.getLat());
 		player.setLng(location.getLng());
+		player.setHasUpdated(true);
 		playerDAO.update(player);
-		playerUpdateList.add(player.getId());
 	}
 
 	public boolean voteKill(String name) {
@@ -123,7 +122,6 @@ public class GameService {
 		Random random = new Random();
 		boolean isWerewolf;
 		Collections.shuffle(users, random);
-		playerUpdateList = new ArrayList<String>();
 		int j = (users.size() - 1)/ 10 * 3;
 		for(int i = 0; i < users.size(); i++)
 		{
@@ -133,8 +131,7 @@ public class GameService {
 					isWerewolf = true;
 				}
 				// Original locations set to 0
-				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf));
-				playerUpdateList.add(users.get(i).getId());
+				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf, false));
 			}
 		}
 		gameDAO.createGame(game);
@@ -191,12 +188,14 @@ public class GameService {
 		if(isRunning && !this.isOver()) {
 			List<Player> players = playerDAO.getAllAlive();
 			for(int i = 0; i < players.size(); i++) {
-				if(!playerUpdateList.contains(players.get(i).getId())) {
+				if(!players.get(i).isHasUpdated()) {
 					players.get(i).setDead(true);
+					playerDAO.update(players.get(i));
+				}else {
+					players.get(i).setHasUpdated(false);
 					playerDAO.update(players.get(i));
 				}
 			}
-			playerUpdateList = new ArrayList<String>();
 		}
 		return true;
 	}

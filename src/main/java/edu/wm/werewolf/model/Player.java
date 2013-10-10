@@ -11,8 +11,9 @@ public class Player extends BasicPlayer{
 	private boolean isWerewolf;
 	private String votedAgainst;
 	private int score;
+	private boolean hasUpdated;
 	
-	public Player(String id, boolean isDead, double d, double e, String userId, boolean isWerewolf) {
+	public Player(String id, boolean isDead, double d, double e, String userId, boolean isWerewolf, boolean hasUpdated) {
 		this.id = id;
 		this.isDead = isDead;
 		this.lat = d;
@@ -20,6 +21,7 @@ public class Player extends BasicPlayer{
 		this.userId = userId;
 		this.isWerewolf = isWerewolf;
 		this.score = 0;
+		this.hasUpdated = hasUpdated;
 	}
 
 	public boolean isWerewolf() {
@@ -155,6 +157,20 @@ public class Player extends BasicPlayer{
 		} else if (!votedAgainst.equals(other.votedAgainst))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the hasUpdated
+	 */
+	public boolean isHasUpdated() {
+		return hasUpdated;
+	}
+
+	/**
+	 * @param hasUpdated the hasUpdated to set
+	 */
+	public void setHasUpdated(boolean hasUpdated) {
+		this.hasUpdated = hasUpdated;
 	}
 	
 }
