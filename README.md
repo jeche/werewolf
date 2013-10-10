@@ -22,7 +22,7 @@ Post
 ----
 <table>
   <tr>
-    <th>Link</th><th>Description</th>
+    <th>Link    </th><th>Description</th>
   </tr>
   <tr>
     <td>\newgame</td><td>starts a new game.  Must have admin credentials to do this.</td>
@@ -38,12 +38,32 @@ Post
   </tr>
 </table>
 
+
+
 Get(without .jsp views)
-+ \game       :: returns a boolean value of whether the game is running or not to the requester.
-+ \highscores :: returns a list of WerewolfUser's scores
-+ \players\getVotable
-+ \players\all :: returns a list of Players.  If a game is running the list is sanitized.
-+ \players\scent :: allows a werewolf to 'scent' the people nearby it.  Returns a list of players where players that are in scent but not kill range have a score of 0, those in kill range have a score of 1, and werewolves in range have a score of 2.
-+ \players\alive :: returns a list of currently living players.  List is sanitized.
+-----------------------
+<table>
+  <tr>
+    <th>Link    </th><th>Description</th>
+  </tr>
+  <tr>
+    <td>\game</td><td>returns a boolean value of whether the game is running or not to the requester.</td>
+  </tr>
+  <tr>
+    <td>\highscores</td><td>returns a list of WerewolfUser's scores</td>
+  </tr>
+    <tr>
+    <td>\players\getVotable</td><td>returns a list of players that can be voted for</td>
+  </tr>
+    <tr>
+    <td>\players\all</td><td>returns a list of all Players.  If a game is running the list is sanitized.</td>
+  </tr>
+      <tr>
+    <td>\players\scent</td><td>allows a werewolf to 'scent' the people nearby it.  Returns a list of players where players that are in scent but not kill range have a score of 0, those in kill range have a score of 1, and werewolves in range have a score of 2.</td>
+  </tr>
+        <tr>
+    <td>\players\alive</td><td>returns a list of currently living players.  List is sanitized.</td>
+  </tr>
+</table>
 
 To use app go to: http://secure-lake-6285.herokuapp.com
