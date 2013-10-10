@@ -12,7 +12,7 @@ url = 'http://secure-lake-6285.herokuapp.com/addUser'
 payload = {'userName': 'atjones', 'id':'atjones', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
 print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
-print("Addition was: " + request.json()["status"])
+print("Addition was: " + request.text)
 
 # Add jlchen
 url = 'http://secure-lake-6285.herokuapp.com/addUser'

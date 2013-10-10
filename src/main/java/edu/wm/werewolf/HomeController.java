@@ -234,14 +234,14 @@ public class HomeController {
 			@RequestParam("hashedPassword")String hashedPassword, Principal principal)
 	{
 		JsonResponse response = new JsonResponse("success");
-		principal.getName();
+		try {
+		System.out.println(principal.getName());
 		String imageURL = "";
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
 		WerewolfUser user = new WerewolfUser(id, firstName, lastName, username, encoded.encode(hashedPassword), imageURL);
-		try {
-			userDAO.createUser(user);
+		userDAO.createUser(user);
 		} catch (Exception e) {
 			// TODO: handle exception
 			response.setStatus("failure);" + e.getStackTrace().toString());
