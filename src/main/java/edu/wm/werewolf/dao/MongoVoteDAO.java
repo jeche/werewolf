@@ -57,7 +57,7 @@ public class MongoVoteDAO implements IVoteDAO {
 			else {
 				voteList.add((int)voted.getNumVotes(), voted);
 			}
-			System.out.println(voetList);
+			System.out.println(voteList);
 		}
 		}
 		finally {
@@ -70,7 +70,7 @@ public class MongoVoteDAO implements IVoteDAO {
 				voteList.remove(i);
 			}
 			i++;
-			System.out.println(voetList);
+			System.out.println(voteList);
 		}
 		return voteList;
 	}
