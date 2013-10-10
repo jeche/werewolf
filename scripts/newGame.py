@@ -66,12 +66,14 @@ payload = {'victim':'sychen'}
 print("Atjones attacking sychen")
 # Makes request
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('atjones', 'test1'))
-print("Moving sychen " + request.json()["status"])
+print("Attacking sychen " + request.json()["status"])
+url = 'http://secure-lake-6285.herokuapp.com/players/alive'
+request = requests.get(url, auth=HTTPBasicAuth('admin', 'admin'))
 result = "sychen not found in alive players"
 for item in request.json():
     if item["id"] == "sychen":
 	result = "failed"
-
+print(result)
 #time.sleep(60)
 
 # Vote for jlchen to die.
@@ -79,18 +81,38 @@ url = 'http://secure-lake-6285.herokuapp.com/players/vote'
 payload = {'voted': 'jlchen'}
 print("Town is voting for " + payload['voted'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('aablohm', 'test1'))
-print("Addition was: " + request.json()["status"])
+print("Vote was done at night so should be failed: " + request.json()["status"])
+print("Waiting for day to try again")
+
+time.sleep(60)
+
+url = 'http://secure-lake-6285.herokuapp.com/players/vote'
+payload = {'voted': 'jlchen'}
+print("Town is voting for " + payload['voted'])
+request = requests.post(url, data=payload, auth=HTTPBasicAuth('aablohm', 'test1'))
+print("Vote was: " + request.json()["status"])
+
 
 # Move everyone so that they are not killed by not updating.
 url = 'http://secure-lake-6285.herokuapp.com/players/location'
 payload = {'lng': '1.0', 'lat': '0.5'}
-print("Moving everyone except jlchen so that they are not killed for lack of updating location")
+print("Moving everyone so that they are not killed for lack of updating location")
 # Makes request
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('aablohm', 'test1'))
 print("Moving aablohm " + request.json()["status"])
 url = 'http://secure-lake-6285.herokuapp.com/players/location'
 payload = {'lng': '1.0', 'lat': '0.5'}
-print("Moving everyone except jlchen so that they are not killed for lack of updating location")
+print("Moving everyone so that they are not killed for lack of updating location")
 # Makes request
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('atjones', 'test1'))
 print("Moving atjones " + request.json()["status"])
+print("Waiting til night time to kill off jlchen with the most votes")
+
+time.sleep(60)
+url = 'http://secure-lake-6285.herokuapp.com/players/alive'
+request = requests.get(url, auth=HTTPBasicAuth('admin', 'admin'))
+result = "jlchen not found in alive players"
+for item in request.json():
+    if item["id"] == "jlchen":
+	result = "failed"
+print(result)

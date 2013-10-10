@@ -57,17 +57,20 @@ public class MongoVoteDAO implements IVoteDAO {
 			else {
 				voteList.add((int)voted.getNumVotes(), voted);
 			}
+			System.out.println(voetList);
 		}
 		}
 		finally {
 			cursor.close();
 		}
+		System.out.println(voteList);
 		int i = 0;
 		while(i < voteList.size()) {
 			if(voteList.get(i).getNumVotes()<voteList.get(voteList.size() - 1).getNumVotes()) {
 				voteList.remove(i);
 			}
 			i++;
+			System.out.println(voetList);
 		}
 		return voteList;
 	}
