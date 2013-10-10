@@ -38,6 +38,7 @@ public class MongoUserDAO implements IUserDAO {
 			user.setAdmin(true);
 		}
 		document.put("isAdmin", user.isAdmin());
+		System.out.println("Made user " + user.getUsername());
 		table.insert(document);
 	}
 	
@@ -57,7 +58,8 @@ public class MongoUserDAO implements IUserDAO {
 		//TODO: Fix to allow users to be set as admins
 		if(cursor == null) {
 			System.out.println("Shoot");
-			return null;}
+			return null;
+			}
 		WerewolfUser user = new WerewolfUser((String)cursor.get("_id"), (String)cursor.get("first"), (String)cursor.get("lastName"), username, (String)cursor.get("password"), (String)cursor.get("imageURL"));
 		if(cursor.get("isAdmin") != null && (boolean)cursor.get("isAdmin")) {
 			user.setAdmin(true);
