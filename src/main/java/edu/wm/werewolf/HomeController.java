@@ -110,17 +110,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/players/vote", method=RequestMethod.POST)
-	public @ResponseBody boolean voteForPlayer(@RequestParam("voted") String voted, Principal principal)
+	public @ResponseBody JsonResponse voteForPlayer(@RequestParam("voted") String voted, Principal principal)
 	{
 		System.out.println("voted " + voted);
+		JsonResponse response = new JsonResponse("success");
 		
 		try {
 			WerewolfUser voter = userDAO.getUserByUsername(principal.getName());
-			return gameService.vote(voter.getId(), voted);
+			if(!gameService.vote(voter.getId(), voted)) {
+				response.setStatus("failed");
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			response.setStatus("failure;" + e.getStackTrace().toString());
 		}
+		return response;
 	}
 	
 	@RequestMapping(value = "/players/kill", method=RequestMethod.POST)
