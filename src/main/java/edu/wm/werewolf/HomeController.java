@@ -177,8 +177,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/location", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse setLocation(@ModelAttribute GPSLocation location, Principal principal) {
-		return null;
+	public @ResponseBody JsonResponse setLocation(@RequestParam("lng") double lng, @RequestParam("lat") double lat, Principal principal) {
+		JsonResponse response = new JsonResponse("Success");
+		try {
+			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
+			GPSLocation location = new GPSLocation();
+			location.setLat(lat);
+			location.setLng(lng);
+			gameService.updatePosition(user.getId(), location);
+		} catch (Exception e) {
+			// TODO: handle exception
+			response.setStatus("Fail" + e.getStackTrace().toString());
+		}
+
+		return response;
 	}
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
