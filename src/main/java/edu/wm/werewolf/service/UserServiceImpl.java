@@ -32,14 +32,14 @@ public class UserServiceImpl implements UserDetailsService, IUserService {
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
 		// TODO: Remove admin functionality
 //		logger.info(user.toString());
-		if(user == null&& username.equals("admin")) {
+		if(user == null && username.equals("admin")) {
 			// Ignore simply used for setup
 			userDAO.createUser(new WerewolfUser("admin", "admin", "admin", "admin", encoded.encode("admin"), "admin"));
 			user.setAdmin(true);
 			userDAO.update(user);
 			user = userDAO.getUserByUsername(username);
 		}
-		if(user == null && !username.equals("admin")) {
+		else if(user == null && !username.equals("admin")) {
 			System.out.println("Grabbed null user.");
 			return null;
 		}
@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserDetailsService, IUserService {
 		// remove || later after setting up database
 		if(user.isAdmin() || username.equals("admin")) {
 			authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+			System.out.println("ADMIN ACCESS");
 		}
 		return new authUser(user.getUsername(), user.getHashedPassword(), true, true, true, true, authorities);
 	}

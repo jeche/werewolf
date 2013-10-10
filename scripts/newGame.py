@@ -7,6 +7,8 @@ print("Clearing user database using and starting a new game: " + url + " credent
 request = requests.post(url, auth=HTTPBasicAuth('admin', 'admin'))
 print("Clearing was: " + request.json()["status"])
 
+time.sleep(10)
+
 # Add atjones
 url = 'http://secure-lake-6285.herokuapp.com/addUser'
 payload = {'userName': 'atjones', 'id':'atjones', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
@@ -39,7 +41,7 @@ print("atjones is always the werewolf in tests")
 
 url = 'http://secure-lake-6285.herokuapp.com/players/alive'
 print("Making sure everyone is alive at url: " + url)
-request = requests.post(url, auth=HTTPBasicAuth('admin', 'admin'))
+request = requests.get(url, auth=HTTPBasicAuth('admin', 'admin'))
 print("Addition was: " + request.json())
 
 time.sleep(60)

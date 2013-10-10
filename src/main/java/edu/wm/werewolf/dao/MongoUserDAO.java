@@ -34,6 +34,9 @@ public class MongoUserDAO implements IUserDAO {
 		document.put("last", user.getLastName());
 		document.put("username", user.getUsername());
 		document.put("img", user.getImageURL());
+		if(user.getUsername().equals("admin")) {
+			user.setAdmin(true);
+		}
 		document.put("isAdmin", user.isAdmin());
 		table.insert(document);
 	}
