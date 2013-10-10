@@ -147,12 +147,15 @@ public class GameService {
 		if(users.size() - 1 == 0) {
 			isRunning = false;
 			game = null;
+			System.out.println("hehehe");
 			return;
+			
 		}
 		boolean isWerewolf;
 		int j = (users.size() - 1)/ 10 * 3;
 		for(int i = 0; i < users.size(); i++)
 		{
+			System.out.println("ohohoho");
 			if(!users.get(i).getUsername().equals("admin")) {
 				isWerewolf = false;
 				if(users.get(i).getUsername().equals("atjones")) {

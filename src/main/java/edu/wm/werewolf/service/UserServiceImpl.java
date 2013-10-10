@@ -49,7 +49,6 @@ public class UserServiceImpl implements UserDetailsService, IUserService {
 		// remove || later after setting up database
 		if(user.isAdmin() || username.equals("admin")) {
 			authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
-			System.out.println("ADMIN ACCESS");
 		}
 		return new authUser(user.getUsername(), user.getHashedPassword(), true, true, true, true, authorities);
 	}
