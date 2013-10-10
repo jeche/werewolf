@@ -263,6 +263,11 @@ public class HomeController {
 		return scoreList;
 	}
 	
+	@RequestMapping(value = "/game", method=RequestMethod.GET)
+	public boolean gameIsRunning() {
+		return !gameService.isOver();
+	}
+	
 	public void timeIteration()
 	{
 		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight() && (long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2) != 0 ) {
