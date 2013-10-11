@@ -131,3 +131,7 @@ for item in request.json():
     if item["id"] == "aablohm":
 	result = "failed"
 print(result)
+
+url = 'http://secure-lake-6285.herokuapp.com/game'
+request = requests.get(url, auth=HTTPBasicAuth('admin', 'admin'))
+print("Does the number of werewolves exceed townsfolk? " + request.text)

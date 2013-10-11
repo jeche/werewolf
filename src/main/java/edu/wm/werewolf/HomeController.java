@@ -205,7 +205,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/player", method=RequestMethod.GET)
+	@RequestMapping(value = "/players", method=RequestMethod.GET)
 	public String playerMenu(ModelMap model, Principal principal) {
 		return "player";
 	}
