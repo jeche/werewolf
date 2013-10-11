@@ -45,6 +45,8 @@ public class MongoVoteDAO implements IVoteDAO {
 		BasicDBObject document = new BasicDBObject();
 		document.put("day", day);
 		DBCursor cursor = table.find(document);
+		System.out.println(cursor.toString());
+		System.out.println(cursor.toArray().toString());
 		Vote voted;
 		List<Vote> voteList = new ArrayList<>();
 		try {
@@ -57,7 +59,6 @@ public class MongoVoteDAO implements IVoteDAO {
 			else {
 				voteList.add((int)voted.getNumVotes(), voted);
 			}
-			System.out.println(voteList);
 		}
 		}
 		finally {
