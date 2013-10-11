@@ -12,14 +12,17 @@ Features
 - [x]    Kill a player (if werewolf and night)
 - [x]    Report current position
 - [x]    Get score list (only viewable by users)
+- [x]    Kill players that do not update at least every 5 minutes in a game
 Special Features
 ----------------
 
 - [x]    Web Console for Admin (in progress)
+- [x]   Online interface for users to be added
 - []    Add infection rate to werewolves, allowing for a chance to infect
 - [x]    Add web interface for users(in progress)
 - []    Allow for users to be set as Admins
 - [x]    Allow for more new game settings, setting a kill zone/scent zone (in progess)
+- []    SSL
 
 The currently viewable links include:
 <table>
@@ -82,6 +85,9 @@ Get(without .jsp views)
   </tr>
         <tr>
     <td>\players\alive</td><td>returns a list of currently living players.  List is sanitized.</td>
+  </tr>
+  <tr>
+    <td>\logout</td><td>when using a web interface allows users to logout assuming they have cleared their cache since their last page access.  Will be fixed in later implementations or removed.</td>
   </tr>
 </table>
 
