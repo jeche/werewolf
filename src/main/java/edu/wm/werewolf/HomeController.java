@@ -286,7 +286,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/game", method=RequestMethod.GET)
-	public boolean gameIsRunning() {
+	public @ResponseBody boolean gameIsRunning() {
 		return !gameService.isOver();
 	}
 	
