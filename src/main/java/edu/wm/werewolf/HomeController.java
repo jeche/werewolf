@@ -295,7 +295,7 @@ public class HomeController {
 		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight() && (long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2) != 0 ) {
 			
 			logger.info("Going to get the most votes for day " + ((long)(new Date()).getTime() - gameService.getGame().getTimer()) / (gameService.getGame().getDayNightFreq()*2));
-			List<Vote> voteList = voteDAO.mostVotes((long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2));
+			List<Vote> voteList = voteDAO.mostVotes(((long)(long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2)));
 			logger.info("Vote List: " + voteList.toString());
 			for(int i = 0; i < voteList.size(); i++) {
 				if(gameService.voteKill(voteList.get(i).getName())) {

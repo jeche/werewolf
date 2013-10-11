@@ -116,3 +116,18 @@ for item in request.json():
     if item["id"] == "jlchen":
 	result = "failed"
 print(result)
+
+url = 'http://secure-lake-6285.herokuapp.com/players/kill'
+payload = {'victim':'aablohm'}
+print("Atjones attacking sychen")
+# Makes request
+request = requests.post(url, data=payload, auth=HTTPBasicAuth('atjones', 'test1'))
+print("Attacking aablohm " + request.json()["status"])
+
+url = 'http://secure-lake-6285.herokuapp.com/players/alive'
+request = requests.get(url, auth=HTTPBasicAuth('admin', 'admin'))
+result = "aablohm not found in alive players"
+for item in request.json():
+    if item["id"] == "aablohm":
+	result = "failed"
+print(result)
