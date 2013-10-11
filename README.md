@@ -2,6 +2,17 @@ werewolf
 ========
 Currently the games can only be started by an admin.  There is currently only a single super admin (Forcibly set with the password: admin, and username: admin), however functionality has been added to allow other users to be set as admins and the super admin will be removed once development is finished.
 
+Features
+--------
+
+[]    Check for players nearby (if werewolf)
+[]    Restart game (if admin)
+[]    Get votable players
+[]    Place a vote on a person (if townsperson)
+[]    Kill a player (if werewolf and night)
+[]    Report current position
+[]    Get highscore list
+
 The currently viewable links include:
 <table>
   <tr>
