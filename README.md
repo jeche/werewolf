@@ -15,11 +15,11 @@ Features
 Special Features
 ----------------
 
-- []    Web Console for Admin
+- [x]    Web Console for Admin (in progress)
 - []    Add infection rate to werewolves, allowing for a chance to infect
-- []
-- []
-- []
+- [x]    Add web interface for users(in progress)
+- []    Allow for users to be set as Admins
+- [x]    Allow for more new game settings, setting a kill zone/scent zone (in progess)
 
 The currently viewable links include:
 <table>
@@ -85,4 +85,8 @@ Get(without .jsp views)
   </tr>
 </table>
 
+Testing
+=======
+Currently there is only one large python script for testing purposes.  It prints out statements telling the user what it is attempting to do.  It then plays through a game and checks at the end to ensure that a game is no longer running.
+To run the script go under the director scritps and run newGame.py
 To use app go to: http://secure-lake-6285.herokuapp.com
