@@ -2,6 +2,25 @@ werewolf
 ========
 Currently the games can only be started by an admin.  There is currently only a single super admin (Forcibly set with the password: admin, and username: admin), however functionality has been added to allow other users to be set as admins and the super admin will be removed once development is finished.
 
+Features
+--------
+
+- [x]    Check for players nearby (if werewolf)
+- [x]    Restart game (if admin)
+- [x]    Get votable players
+- [x]    Place a vote on a person (if it is day)
+- [x]    Kill a player (if werewolf and night)
+- [x]    Report current position
+- [x]    Get score list (only viewable by users)
+Special Features
+----------------
+
+- [x]    Web Console for Admin (in progress)
+- []    Add infection rate to werewolves, allowing for a chance to infect
+- [x]    Add web interface for users(in progress)
+- []    Allow for users to be set as Admins
+- [x]    Allow for more new game settings, setting a kill zone/scent zone (in progess)
+
 The currently viewable links include:
 <table>
   <tr>
@@ -65,5 +84,10 @@ Get(without .jsp views)
     <td>\players\alive</td><td>returns a list of currently living players.  List is sanitized.</td>
   </tr>
 </table>
+
+Testing
+=======
+Currently there is only one large python script for testing purposes.  It prints out statements telling the user what it is attempting to do.  It then plays through a game and checks at the end to ensure that a game is no longer running.
+To run the script go under the director scritps and run newGame.py
 
 To use app go to: http://secure-lake-6285.herokuapp.com
