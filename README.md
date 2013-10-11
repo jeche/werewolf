@@ -89,4 +89,5 @@ Testing
 =======
 Currently there is only one large python script for testing purposes.  It prints out statements telling the user what it is attempting to do.  It then plays through a game and checks at the end to ensure that a game is no longer running.
 To run the script go under the director scritps and run newGame.py
+
 To use app go to: http://secure-lake-6285.herokuapp.com
