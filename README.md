@@ -5,13 +5,13 @@ Currently the games can only be started by an admin.  There is currently only a 
 Features
 --------
 
-[]    Check for players nearby (if werewolf)
-[]    Restart game (if admin)
-[]    Get votable players
-[]    Place a vote on a person (if townsperson)
-[]    Kill a player (if werewolf and night)
-[]    Report current position
-[]    Get highscore list
+- []    Check for players nearby (if werewolf)
+- []    Restart game (if admin)
+- []    Get votable players
+- []    Place a vote on a person (if townsperson)
+- []    Kill a player (if werewolf and night)
+- []    Report current position
+- []    Get highscore list
 
 The currently viewable links include:
 <table>
