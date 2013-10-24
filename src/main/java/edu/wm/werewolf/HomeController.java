@@ -251,7 +251,6 @@ public class HomeController {
 	{
 		JsonResponse response = new JsonResponse("success");
 		try {
-		System.out.println(principal.getName());
 		String imageURL = "";
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
@@ -259,8 +258,7 @@ public class HomeController {
 		WerewolfUser user = new WerewolfUser(id, firstName, lastName, username, encoded.encode(hashedPassword), imageURL);
 		userDAO.createUser(user);
 		} catch (Exception e) {
-			// TODO: handle exception
-			response.setStatus("failure);" + e.getStackTrace().toString());
+			response.setStatus("failure);" + e.getMessage().toString());
 		}
 		return response;
 	}
