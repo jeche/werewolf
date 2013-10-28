@@ -201,8 +201,10 @@ public class GameService {
 			WerewolfUser user;
 			for(int i = 0; i < pList.size(); i++) {
 				user = userDAO.getUserByUsername(pList.get(i).getUserId());
-				user.setScore(user.getScore() + pList.get(i).getScore());
-				userDAO.update(user);
+				if(user!= null) {
+					user.setScore(user.getScore() + pList.get(i).getScore());
+					userDAO.update(user);
+				}
 			}
 			isRunning = false;
 			return true;
