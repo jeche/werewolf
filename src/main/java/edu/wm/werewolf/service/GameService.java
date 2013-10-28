@@ -237,4 +237,9 @@ public class GameService {
 		voteDAO.clearVotes();
 		isRunning = false;
 	}
+
+	public int getNumKills(Player player) {
+		return killDAO.getKillsByPlayerID(player.getId()).size();
+		
+	}
 }

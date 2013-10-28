@@ -3,6 +3,11 @@ package edu.wm.werewolf.model;
 public class JsonResponse {
 	
 	String status;
+	String isWerewolf;
+	String kills;
+	String created;
+	String isDead;
+	String nightFreq;
 
 	/**
 	 * @return the status
@@ -29,5 +34,75 @@ public class JsonResponse {
 	@Override
 	public String toString() {
 		return "JsonResponse [status=" + status + "]";
+	}
+
+	/**
+	 * @return the isWerewolf
+	 */
+	public String getIsWerewolf() {
+		return isWerewolf;
+	}
+
+	/**
+	 * @param isWerewolf the isWerewolf to set
+	 */
+	public void setIsWerewolf(String isWerewolf) {
+		this.isWerewolf = isWerewolf;
+	}
+
+	/**
+	 * @return the kills
+	 */
+	public String getKills() {
+		return kills;
+	}
+
+	/**
+	 * @param kills the kills to set
+	 */
+	public void setKills(String kills) {
+		this.kills = kills;
+	}
+
+	/**
+	 * @return the created
+	 */
+	public String getCreated() {
+		return created;
+	}
+
+	/**
+	 * @param created the created to set
+	 */
+	public void setCreated(String created) {
+		this.created = created;
+	}
+
+	/**
+	 * @return the isDead
+	 */
+	public String getIsDead() {
+		return isDead;
+	}
+
+	/**
+	 * @param isDead the isDead to set
+	 */
+	public void setIsDead(String isDead) {
+		this.isDead = isDead;
+	}
+
+	/**
+	 * @return the nightFreq
+	 */
+	public String getNightFreq() {
+		return nightFreq;
+	}
+
+	/**
+	 * @param nightFreq the nightFreq to set
+	 */
+	public void setNightFreq(String nightFreq) {
+		this.nightFreq = nightFreq;
 	}
 }

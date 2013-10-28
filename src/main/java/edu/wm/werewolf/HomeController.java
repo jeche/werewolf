@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.wm.werewolf.dao.IPlayerDAO;
 import edu.wm.werewolf.dao.IUserDAO;
 import edu.wm.werewolf.dao.IVoteDAO;
 import edu.wm.werewolf.exceptions.NoPlayerFoundException;
@@ -52,6 +53,7 @@ import edu.wm.werewolf.service.VoteListener;
 @Controller
 public class HomeController {
 	@Autowired private IUserDAO userDAO;
+	@Autowired private IPlayerDAO playerDAO;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired IVoteDAO voteDAO;
 	@Autowired private GameService gameService;
@@ -118,7 +120,7 @@ public class HomeController {
 		try {
 			WerewolfUser voter = userDAO.getUserByUsername(principal.getName());
 			if(!gameService.vote(voter.getId(), voted)) {
-				response.setStatus("failed");
+				response.setStatus("failure;");
 			}
 		} catch (Exception e) {
 			response.setStatus("failure;" + e.getStackTrace().toString());
@@ -184,7 +186,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/players/location", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setLocation(@RequestParam("lng") double lng, @RequestParam("lat") double lat, Principal principal) {
-		JsonResponse response = new JsonResponse("Success");
+		JsonResponse response = new JsonResponse("success");
 		try {
 			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 			GPSLocation location = new GPSLocation();
@@ -193,7 +195,7 @@ public class HomeController {
 			gameService.updatePosition(user.getId(), location);
 		} catch (Exception e) {
 			// TODO: handle exception
-			response.setStatus("Fail" + e.toString());
+			response.setStatus("failure;\n" + e.toString());
 			e.printStackTrace();
 		}
 
@@ -220,6 +222,27 @@ public class HomeController {
 	@RequestMapping(value = "/admin", method=RequestMethod.GET)
 	public String admin(ModelMap model, Principal principal) {
 		return "admin";
+	}
+	
+	@RequestMapping(value = "/gameStats", method=RequestMethod.GET)
+	public @ResponseBody JsonResponse gameStats(ModelMap model, Principal principal) {
+		JsonResponse response = new JsonResponse("isover");
+		if(gameService.isOver()) {
+			return response;
+		}
+		response.setStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
+		if(principal != null && principal.getName() != null) {
+			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
+			Player player = playerDAO.getPlayerByID(user.getId());
+			response.setCreated(gameService.getGame().getTimer() +"");
+			response.setNightFreq(gameService.getGame().getDayNightFreq() +"");
+			response.setIsDead(player.isDead() + "");
+			response.setIsWerewolf(player.isWerewolf()+"");
+			if(player.isWerewolf()) {
+				 response.setKills(gameService.getNumKills(player) + "");
+			}
+		}
+		return response;
 	}
 	
 	@RequestMapping(value = "/admin/test", method=RequestMethod.POST)
@@ -271,7 +294,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/highscores", method=RequestMethod.GET)
-	public List<WerewolfUser> allTimeHighscoreList(){
+	public @ResponseBody List<WerewolfUser> allTimeHighscoreList(){
 		List<WerewolfUser> scoreList =  userDAO.getAllUsers();
 		for(int i = 0; i < scoreList.size(); i++) {
 			scoreList.get(i).setAdmin(false);
@@ -290,7 +313,7 @@ public class HomeController {
 	
 	public void timeIteration()
 	{
-		if(gameService.getGame()!=null && wasDay && gameService.getGame().isNight() && (long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2) != 0 ) {
+		if(gameService.getGame()!=null&& !gameService.isOver() && wasDay && gameService.getGame().isNight() && (long)(new Date()).getTime() / (gameService.getGame().getDayNightFreq()*2) != 0 ) {
 			
 			logger.info("Going to get the most votes for day " + ((long)(new Date()).getTime() - gameService.getGame().getTimer()) / (gameService.getGame().getDayNightFreq()*2));
 			List<Vote> voteList = voteDAO.mostVotes(((long)(new Date()).getTime() - gameService.getGame().getTimer()) / (gameService.getGame().getDayNightFreq()*2));
@@ -302,7 +325,7 @@ public class HomeController {
 			}
 			wasDay = false;
 		}
-		if(gameService.getGame()!=null && !wasDay && !gameService.getGame().isNight()) {
+		if(gameService.getGame()!=null && !gameService.isOver() &&!wasDay && !gameService.getGame().isNight()) {
 			wasDay = true;
 		}// Players must update every 5 minutes, do not have to update for the first ten minutes, could be changed to fit game time
 		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) % 5  == 0 && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) / 5 != 0){
