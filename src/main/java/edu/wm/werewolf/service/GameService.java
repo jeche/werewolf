@@ -196,7 +196,7 @@ public class GameService {
 	}
 	
 	public boolean isOver() {
-		if(playerDAO.numWolves() >= playerDAO.numTown() || playerDAO.numWolves() == 0) {
+		if((playerDAO.numWolves() >= playerDAO.numTown() || playerDAO.numWolves() == 0 )&& isRunning) {
 			List<Player> pList = playerDAO.getAllPlayers();
 			WerewolfUser user;
 			for(int i = 0; i < pList.size(); i++) {
@@ -211,6 +211,7 @@ public class GameService {
 	}
 
 	public Game getGame() {
+		isRunning = true;
 		game = gameDAO.getGame();
 		return game;
 	}
