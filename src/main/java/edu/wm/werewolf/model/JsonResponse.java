@@ -8,6 +8,7 @@ public class JsonResponse {
 	String created;
 	String isDead;
 	String nightFreq;
+	String gameStatus;
 
 	/**
 	 * @return the status
@@ -104,5 +105,19 @@ public class JsonResponse {
 	 */
 	public void setNightFreq(String nightFreq) {
 		this.nightFreq = nightFreq;
+	}
+
+	/**
+	 * @return the gameStatus
+	 */
+	public String getGameStatus() {
+		return gameStatus;
+	}
+
+	/**
+	 * @param gameStatus the gameStatus to set
+	 */
+	public void setGameStatus(String gameStatus) {
+		this.gameStatus = gameStatus;
 	}
 }

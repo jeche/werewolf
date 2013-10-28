@@ -226,11 +226,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/gameStats", method=RequestMethod.GET)
 	public @ResponseBody JsonResponse gameStats(ModelMap model, Principal principal) {
-		JsonResponse response = new JsonResponse("isover");
+		JsonResponse response = new JsonResponse("success");
+		response.setGameStatus("isOver");
 		if(gameService.isOver()) {
 			return response;
 		}
-		response.setStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
+		response.setGameStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
 		if(principal != null && principal.getName() != null) {
 			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 			Player player = playerDAO.getPlayerByID(user.getId());
