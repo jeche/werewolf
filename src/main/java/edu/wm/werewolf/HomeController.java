@@ -227,6 +227,7 @@ public class HomeController {
 	@RequestMapping(value = "/gameStats", method=RequestMethod.GET)
 	public @ResponseBody JsonResponse gameStats(ModelMap model, Principal principal) {
 		JsonResponse response = new JsonResponse("success");
+		System.out.println(principal.getName());
 		response.setGameStatus("isOver");
 		if(gameService.isOver()) {
 			return response;
