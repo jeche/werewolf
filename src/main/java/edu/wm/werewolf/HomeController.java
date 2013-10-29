@@ -96,6 +96,26 @@ public class HomeController {
 		return players;
 	}
 	
+	@RequestMapping(value = "/players/getinfo", method=RequestMethod.GET)
+	public @ResponseBody Player getInfo(@RequestParam("player") String playername, Principal principal)
+	{
+		WerewolfUser user = userDAO.getUserByUsername(principal.getName());
+		Player requestPlayer = playerDAO.getPlayerByID(user.getId());
+		Player player = playerDAO.getPlayerByID(playername);
+		if(!player.equals(requestPlayer)) {
+			player.setHasUpdated(false);
+			player.setLat(0);
+			player.setLng(0);
+			player.setUserId(null);
+			player.setScore(0);
+			player.setVotedAgainst(null);
+			if(!requestPlayer.isWerewolf()) {
+				player.setWerewolf(false);
+			}
+		}
+		return player;
+	}
+	
 	@RequestMapping(value = "/players/all", method=RequestMethod.GET)
 	public @ResponseBody List<Player> getAllPlayers(Principal principal)
 	{
