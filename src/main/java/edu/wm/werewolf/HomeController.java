@@ -233,6 +233,7 @@ public class HomeController {
 		}
 		response.setGameStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
 		if(principal != null && principal.getName() != null) {
+			System.out.println("MADE IT");
 			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 			Player player = playerDAO.getPlayerByID(user.getId());
 			response.setCreated(gameService.getGame().getTimer() +"");
