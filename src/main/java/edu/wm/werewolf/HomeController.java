@@ -179,6 +179,7 @@ public class HomeController {
 		}
 		return players;
 		} catch (Exception e){
+			e.printStackTrace();
 			return null;
 		}
 		
