@@ -241,9 +241,9 @@ public class HomeController {
 			response.setNightFreq(gameService.getGame().getDayNightFreq() +"");
 			response.setIsDead(player.isDead() + "");
 			response.setIsWerewolf(player.isWerewolf()+"");
-			if(player.isWerewolf()) {
+			/*if(player.isWerewolf()) {
 				 response.setKills(gameService.getNumKills(player) + "");
-			}
+			}*/
 		}
 		return response;
 	}
