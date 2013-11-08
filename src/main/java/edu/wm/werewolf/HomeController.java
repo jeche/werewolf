@@ -249,10 +249,6 @@ public class HomeController {
 	public @ResponseBody JsonResponse gameStats(ModelMap model, Principal principal) {
 		JsonResponse response = new JsonResponse("success");
 		System.out.println(principal.getName());
-		response.setGameStatus("isOver");
-		if(gameService.isOver()) {
-			return response;
-		}
 		response.setGameStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
 		if(principal != null && principal.getName() != null) {
 			System.out.println("MADE IT");
@@ -266,6 +262,11 @@ public class HomeController {
 				 response.setKills(gameService.getNumKills(player) + "");
 			}*/
 		}
+		if(gameService.isOver()) {
+			response.setGameStatus("isOver");
+			return response;
+		}
+
 		return response;
 	}
 	
