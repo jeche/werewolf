@@ -97,8 +97,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/players/getinfo/{playername}", method=RequestMethod.GET)
-	public @ResponseBody Player getInfo(@PathVariable("playername") String playername, Principal principal)
+	public @ResponseBody Player getInfo(@PathVariable String playername, Principal principal)
 	{
+		System.out.println(playername);
 		WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 		Player requestPlayer = playerDAO.getPlayerByID(user.getId());
 		Player player = playerDAO.getPlayerByID(playername);
