@@ -107,9 +107,9 @@ public class HomeController {
 			player.setHasUpdated(false);
 			player.setLat(0);
 			player.setLng(0);
-			player.setUserId(null);
+			player.setUserId("");
 			player.setScore(0);
-			player.setVotedAgainst(null);
+			player.setVotedAgainst("");
 			if(!requestPlayer.isWerewolf()) {
 				player.setWerewolf(false);
 			}
@@ -125,9 +125,9 @@ public class HomeController {
 			players.get(i).setScore(0);
 			players.get(i).setLat(0);
 			players.get(i).setLng(0);
-			players.get(i).setVotedAgainst(null);
+			players.get(i).setVotedAgainst("");
 			players.get(i).setWerewolf(false);
-			players.get(i).setUserId(null);
+			players.get(i).setUserId("");
 		}
 		return players;
 	}
@@ -194,9 +194,9 @@ public class HomeController {
 			}
 			players.get(i).setLat(0);
 			players.get(i).setLng(0);
-			players.get(i).setVotedAgainst(null);
+			players.get(i).setVotedAgainst("");
 			players.get(i).setWerewolf(false);
-			players.get(i).setUserId(null);
+			players.get(i).setUserId("");
 		}
 		return players;
 		} catch (Exception e){
@@ -355,7 +355,7 @@ public class HomeController {
 			wasDay = true;
 		}// Players must update every 5 minutes, do not have to update for the first ten minutes, could be changed to fit game time
 		if(gameService.getGame() != null && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) % 5  == 0 && ((((new Date()).getTime())- gameService.getGame().getTimer()) / 60000) / 5 != 0){
-			gameService.checkLocationUpdates();
+//			gameService.checkLocationUpdates();
 		}
 	}
 	
