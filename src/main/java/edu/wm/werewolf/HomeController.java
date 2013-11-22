@@ -255,8 +255,8 @@ public class HomeController {
 			System.out.println("MADE IT");
 			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 			Player player = playerDAO.getPlayerByID(user.getId());
-			response.setCreated(gameService.getGame().getTimer() +"");
-			response.setNightFreq(gameService.getGame().getDayNightFreq() +"");
+			response.setCreated(gameService.getGame().getTimer());
+			response.setNightFreq(gameService.getGame().getDayNightFreq());
 			response.setIsDead(player.isDead() + "");
 			response.setIsWerewolf(player.isWerewolf()+"");
 			/*if(player.isWerewolf()) {

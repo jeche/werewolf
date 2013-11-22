@@ -5,9 +5,9 @@ public class JsonResponse {
 	String status;
 	String isWerewolf;
 	String kills;
-	String created;
+	long created;
 	String isDead;
-	String nightFreq;
+	long nightFreq;
 	String gameStatus;
 
 	/**
@@ -68,14 +68,14 @@ public class JsonResponse {
 	/**
 	 * @return the created
 	 */
-	public String getCreated() {
+	public long getCreated() {
 		return created;
 	}
 
 	/**
 	 * @param created the created to set
 	 */
-	public void setCreated(String created) {
+	public void setCreated(long created) {
 		this.created = created;
 	}
 
@@ -96,14 +96,14 @@ public class JsonResponse {
 	/**
 	 * @return the nightFreq
 	 */
-	public String getNightFreq() {
+	public long getNightFreq() {
 		return nightFreq;
 	}
 
 	/**
 	 * @param nightFreq the nightFreq to set
 	 */
-	public void setNightFreq(String nightFreq) {
+	public void setNightFreq(long nightFreq) {
 		this.nightFreq = nightFreq;
 	}
 
