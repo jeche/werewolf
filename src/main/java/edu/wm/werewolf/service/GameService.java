@@ -255,8 +255,8 @@ public class GameService {
 	}
 	
 	public List<Player> getAppropriatePlayers(Player player){
-		List<Player> players = this.scent(player.getId());
-		if(players == null) {
+		List<Player> players = this.getAllPlayers();
+		if(players == null || !player.isWerewolf()) {
 			// Person making a the request is not a werewolf.
 			players = this.getAllPlayers();
 			for(int i = 0; i < players.size(); i++) {
@@ -271,14 +271,18 @@ public class GameService {
 			
 		}
 		List<Player> killplayers = this.killable(player.getId());
+		List<Player> soManyLists = this.scent(player.getId());; 
 		for(int i = 0; i < players.size(); i++) {
 			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))) {
 				// Is a kill-able player
 				players.get(i).setScore(1);
 			}
-			else{
+			else if (soManyLists != null && soManyLists.size() != 0 && soManyLists.contains(players.get(i))){
 				// Is a nearby, but not a kill-able player
 				players.get(i).setScore(0);
+			}
+			else {
+				players.get(i).setScore(3);
 			}
 			if(players.get(i).isWerewolf()) {
 				// If a scented player is a werewolf the score the other player sees is 2.
