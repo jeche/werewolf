@@ -252,19 +252,23 @@ public class HomeController {
 		System.out.println(principal.getName());
 		response.setGameStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
 		if(principal != null && principal.getName() != null) {
-			System.out.println("MADE IT");
 			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
 			Player player = playerDAO.getPlayerByID(user.getId());
 			response.setCreated(gameService.getGame().getTimer());
 			response.setNightFreq(gameService.getGame().getDayNightFreq());
 			response.setIsDead(player.isDead() + "");
 			response.setIsWerewolf(player.isWerewolf()+"");
+			response.setPlayers(gameService.getAppropriatePlayers(player));
+			response.setNumPeep(gameService.getPeepNum());
+			response.setNumWolf(gameService.getWolfNum());
 			/*if(player.isWerewolf()) {
 				 response.setKills(gameService.getNumKills(player) + "");
 			}*/
 		}
 		if(gameService.isOver()) {
 			response.setGameStatus("isOver");
+//			response.setNumPeep(gameService.getPeepNum());
+//			response.setNumWolf(/*gameService.getWolfNum()*/);
 			return response;
 		}
 

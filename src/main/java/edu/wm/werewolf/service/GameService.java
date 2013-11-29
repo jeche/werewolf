@@ -245,4 +245,52 @@ public class GameService {
 		return killDAO.getKillsByPlayerID(player.getId()).size();
 		
 	}
+	
+	public int getWolfNum() {
+		return playerDAO.numWolves();
+	}
+	
+	public int getPeepNum() {
+		return playerDAO.numTown();
+	}
+	
+	public List<Player> getAppropriatePlayers(Player player){
+		List<Player> players = this.scent(player.getId());
+		if(players == null) {
+			// Person making a the request is not a werewolf.
+			players = this.getAllPlayers();
+			for(int i = 0; i < players.size(); i++) {
+				players.get(i).setScore(0);
+				players.get(i).setLat(0);
+				players.get(i).setLng(0);
+				players.get(i).setVotedAgainst("");
+				players.get(i).setWerewolf(false);
+				players.get(i).setUserId("");
+			}
+			return players;
+			
+		}
+		List<Player> killplayers = this.killable(player.getId());
+		for(int i = 0; i < players.size(); i++) {
+			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))) {
+				// Is a kill-able player
+				players.get(i).setScore(1);
+			}
+			else{
+				// Is a nearby, but not a kill-able player
+				players.get(i).setScore(0);
+			}
+			if(players.get(i).isWerewolf()) {
+				// If a scented player is a werewolf the score the other player sees is 2.
+				players.get(i).setScore(2);
+			}
+			players.get(i).setLat(0);
+			players.get(i).setLng(0);
+			players.get(i).setVotedAgainst("");
+			players.get(i).setWerewolf(false);
+			players.get(i).setUserId("");
+		}
+		
+		return players;
+	}
 }

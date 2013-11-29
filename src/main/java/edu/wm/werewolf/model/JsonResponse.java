@@ -1,5 +1,7 @@
 package edu.wm.werewolf.model;
 
+import java.util.List;
+
 public class JsonResponse {
 	
 	String status;
@@ -9,6 +11,9 @@ public class JsonResponse {
 	String isDead;
 	long nightFreq;
 	String gameStatus;
+	List<Player> players;
+	int numWolf;
+	int numPeep;
 
 	/**
 	 * @return the status
@@ -119,5 +124,47 @@ public class JsonResponse {
 	 */
 	public void setGameStatus(String gameStatus) {
 		this.gameStatus = gameStatus;
+	}
+
+	/**
+	 * @return the players
+	 */
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	/**
+	 * @param players the players to set
+	 */
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
+	/**
+	 * @return the numWolf
+	 */
+	public int getNumWolf() {
+		return numWolf;
+	}
+
+	/**
+	 * @param numWolf the numWolf to set
+	 */
+	public void setNumWolf(int numWolf) {
+		this.numWolf = numWolf;
+	}
+
+	/**
+	 * @return the numPeep
+	 */
+	public int getNumPeep() {
+		return numPeep;
+	}
+
+	/**
+	 * @param numPeep the numPeep to set
+	 */
+	public void setNumPeep(int numPeep) {
+		this.numPeep = numPeep;
 	}
 }
