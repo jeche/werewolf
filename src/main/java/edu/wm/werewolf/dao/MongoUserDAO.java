@@ -60,7 +60,7 @@ public class MongoUserDAO implements IUserDAO {
 			System.out.println("Shoot");
 			return null;
 			}
-		WerewolfUser user = new WerewolfUser((String)cursor.get("_id"), (String)cursor.get("first"), (String)cursor.get("lastName"), username, (String)cursor.get("password"), (String)cursor.get("imageURL"));
+		WerewolfUser user = new WerewolfUser((String)cursor.get("_id"), (String)cursor.get("first"), (String)cursor.get("lastName"), username, (String)cursor.get("password"), (String)cursor.get("img"));
 		if(cursor.get("isAdmin") != null && (boolean)cursor.get("isAdmin")) {
 			user.setAdmin(true);
 		}
@@ -80,7 +80,7 @@ public class MongoUserDAO implements IUserDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			alive = new WerewolfUser((String)item.get("_id"), (String)item.get("first"), (String)item.get("lastName"), (String)item.get("username"), (String)item.get("password"), (String)item.get("imageURL"));
+			alive = new WerewolfUser((String)item.get("_id"), (String)item.get("first"), (String)item.get("lastName"), (String)item.get("username"), (String)item.get("password"), (String)item.get("img"));
 			players.add(alive);
 		}
 		}
