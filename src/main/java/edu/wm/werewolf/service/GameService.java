@@ -28,8 +28,8 @@ public class GameService {
 	@Autowired private IKillDAO killDAO;
 	@Autowired private IGameDAO gameDAO;
 	@Autowired private IVoteDAO voteDAO;
-	final private double DEFAULT_KILL_RANGE = 2;
-	final private double DEFAULT_SCENT_RANGE = 1;
+	final private double DEFAULT_KILL_RANGE = 200;
+	final private double DEFAULT_SCENT_RANGE = 200;
 	final private int KILL_POINTS = 2;
 	private boolean isRunning = false;
 	Timer timer;
