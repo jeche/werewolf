@@ -68,6 +68,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		document.put("isWerewolf", updated.isWerewolf());
 		document.put("isDead", updated.isDead());
 		document.put("hasUpdated", updated.isHasUpdated());
+		document.put("img", updated.getImgString());
 		table.save(document);
 		// Used for indexing to allow for geospatial queries.
 		DBObject index2d = BasicDBObjectBuilder.start("loc", "2d").get();
@@ -86,6 +87,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		document.put("isWerewolf", player.isWerewolf());
 		document.put("isDead", player.isDead());
 		document.put("hasUpdated", player.isHasUpdated());
+		document.put("img", player.getImgString());
 		table.insert(document);
 		DBObject index2d = BasicDBObjectBuilder.start("loc", "2d").get();
 		
