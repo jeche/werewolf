@@ -273,11 +273,11 @@ public class GameService {
 		List<Player> killplayers = this.killable(player.getId());
 		List<Player> soManyLists = this.scent(player.getId());; 
 		for(int i = 0; i < players.size(); i++) {
-			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))) {
+			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))&& this.getGame().isNight()) {
 				// Is a kill-able player
 				players.get(i).setScore(2);
 			}
-			else if (soManyLists != null && soManyLists.size() != 0 && soManyLists.contains(players.get(i))){
+			else if (soManyLists != null && soManyLists.size() != 0 && soManyLists.contains(players.get(i))&& this.getGame().isNight()){
 				// Is a nearby, but not a kill-able player
 				players.get(i).setScore(1);
 			}
