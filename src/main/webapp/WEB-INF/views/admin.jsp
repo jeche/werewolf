@@ -27,6 +27,7 @@ Last name: <input type="text" name="lastName"><br>
 Password: <input type="password" name="hashedPassword"><br>
 User name: <input type="text" name="userName"><br>
 ID: <input type="text" name="id"><br>
+IMG: <input type="text" name="img"><br>
 <input type="submit" value="Submit">
 </form> 
 </div>
