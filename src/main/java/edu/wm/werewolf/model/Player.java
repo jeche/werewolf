@@ -11,9 +11,10 @@ public class Player extends BasicPlayer{
 	private boolean isWerewolf;
 	private String votedAgainst;
 	private int score;
+	private String img;
 	private boolean hasUpdated;
 	
-	public Player(String id, boolean isDead, double d, double e, String userId, boolean isWerewolf, boolean hasUpdated) {
+	public Player(String id, boolean isDead, double d, double e, String userId, boolean isWerewolf, boolean hasUpdated, String img) {
 		this.id = id;
 		this.isDead = isDead;
 		this.lat = d;
@@ -22,6 +23,7 @@ public class Player extends BasicPlayer{
 		this.isWerewolf = isWerewolf;
 		this.score = 0;
 		this.hasUpdated = hasUpdated;
+		this.img = img;
 	}
 
 	public boolean isWerewolf() {
@@ -171,6 +173,20 @@ public class Player extends BasicPlayer{
 	 */
 	public void setHasUpdated(boolean hasUpdated) {
 		this.hasUpdated = hasUpdated;
+	}
+
+	/**
+	 * @return the imgString
+	 */
+	public String getImgString() {
+		return img;
+	}
+
+	/**
+	 * @param imgString the imgString to set
+	 */
+	public void setImgString(String imgString) {
+		this.img = imgString;
 	}
 	
 }

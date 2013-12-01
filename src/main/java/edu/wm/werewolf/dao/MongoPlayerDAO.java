@@ -45,7 +45,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"));
+			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"), (String)item.get("img"));
 			players.add(alive);
 		}
 		}
@@ -99,7 +99,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		DBObject cursor = table.findOne(query);
 		if(cursor == null)
 			throw new NoPlayerFoundException(id);
-		Player retValPlayer = new Player((String)cursor.get("_id"), (boolean) cursor.get("isDead"), (double) ((BasicDBList)cursor.get("loc")).get(1), (double) ((BasicDBList)cursor.get("loc")).get(0), (String) cursor.get("userId"),(boolean) cursor.get("isWerewolf"), (boolean) cursor.get("hasUpdated"));
+		Player retValPlayer = new Player((String)cursor.get("_id"), (boolean) cursor.get("isDead"), (double) ((BasicDBList)cursor.get("loc")).get(1), (double) ((BasicDBList)cursor.get("loc")).get(0), (String) cursor.get("userId"),(boolean) cursor.get("isWerewolf"), (boolean) cursor.get("hasUpdated"), (String) cursor.get("img"));
 		return retValPlayer;
 	}
 	
@@ -112,7 +112,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"));
+			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"), (String)item.get("img") );
 			players.add(alive);
 		}
 		}
@@ -138,7 +138,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"));
+			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"), (String) item.get("img"));
 			if(!alive.isDead()) {
 				players.add(alive);
 			}
@@ -166,7 +166,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"));
+			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"), (String)item.get("img") );
 			if(!alive.isDead()) {
 				players.add(alive);
 			}
@@ -189,7 +189,7 @@ public class MongoPlayerDAO implements IPlayerDAO {
 		try {
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"));
+			alive = new Player((String)item.get("_id"), (boolean) item.get("isDead"),(double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0), (String) item.get("userId"),(boolean) item.get("isWerewolf"), (boolean) item.get("hasUpdated"), (String)item.get("img") );
 			if(!alive.isDead()) {
 				players.add(alive);
 			}

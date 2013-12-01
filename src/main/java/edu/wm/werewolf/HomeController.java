@@ -173,7 +173,7 @@ public class HomeController {
 		if(players == null) {
 			// Person making a the request is not a werewolf.
 			players= new ArrayList<Player>();
-			Player player = new Player("NOT A WEREWOLF", false, 0, 0, "NOT A WEREWOLF", false, false);
+			Player player = new Player("NOT A WEREWOLF", false, 0, 0, "NOT A WEREWOLF", false, false, "M");
 			players.add(player);
 			return players;
 			
@@ -300,15 +300,18 @@ public class HomeController {
 	@RequestMapping(value = "/addUser", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse addUser(@RequestParam("userName")String username, @RequestParam("id")String id,
 			@RequestParam("firstName")String firstName, @RequestParam("lastName")String lastName,
-			@RequestParam("hashedPassword")String hashedPassword, Principal principal)
+			@RequestParam("hashedPassword")String hashedPassword, @RequestParam("img") String img, Principal principal)
 	{
 		JsonResponse response = new JsonResponse("success");
 		try {
-		String imageURL = "";
+		String imageURL = img;
+		if(!img.equals("F") && !img.equals("M")) {
+			img = "M";
+		}
 		BCryptPasswordEncoder encoded = new BCryptPasswordEncoder();
 		Collection<GrantedAuthorityImpl> auth = new ArrayList<GrantedAuthorityImpl>();
 		auth.add(new GrantedAuthorityImpl("ROLE_USER"));
-		WerewolfUser user = new WerewolfUser(id, firstName, lastName, username, encoded.encode(hashedPassword), imageURL);
+		WerewolfUser user = new WerewolfUser(id, firstName, lastName, username, encoded.encode(hashedPassword), img);
 		userDAO.createUser(user);
 		} catch (Exception e) {
 			response.setStatus("failure);" + e.getMessage().toString());

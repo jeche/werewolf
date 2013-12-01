@@ -131,7 +131,7 @@ public class GameService {
 					isWerewolf = true;
 				}
 				// Original locations set to 0
-				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf, false));
+				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf, false, users.get(i).getImageURL()));
 			}
 		}
 		gameDAO.createGame(game);
@@ -162,7 +162,7 @@ public class GameService {
 					isWerewolf = true;
 				}
 				// Original locations set to 0
-				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf, false));
+				playerDAO.createPlayer(new Player(users.get(i).getId(), false, 0, 0, users.get(i).getId(), isWerewolf, false, users.get(i).getImageURL()));
 			}
 		}
 		gameDAO.createGame(game);
