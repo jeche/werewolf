@@ -275,18 +275,18 @@ public class GameService {
 		for(int i = 0; i < players.size(); i++) {
 			if(killplayers != null && killplayers.size() != 0 && killplayers.contains(players.get(i))) {
 				// Is a kill-able player
-				players.get(i).setScore(1);
+				players.get(i).setScore(2);
 			}
 			else if (soManyLists != null && soManyLists.size() != 0 && soManyLists.contains(players.get(i))){
 				// Is a nearby, but not a kill-able player
-				players.get(i).setScore(0);
+				players.get(i).setScore(1);
 			}
 			else {
-				players.get(i).setScore(3);
+				players.get(i).setScore(0);
 			}
 			if(players.get(i).isWerewolf()) {
 				// If a scented player is a werewolf the score the other player sees is 2.
-				players.get(i).setScore(2);
+				players.get(i).setScore(0);
 			}
 			players.get(i).setLat(0);
 			players.get(i).setLng(0);
