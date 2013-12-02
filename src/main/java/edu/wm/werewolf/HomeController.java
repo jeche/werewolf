@@ -261,6 +261,15 @@ public class HomeController {
 			response.setPlayers(gameService.getAppropriatePlayers(player));
 			response.setNumPeep(gameService.getPeepNum());
 			response.setNumWolf(gameService.getWolfNum());
+			if(player.isWerewolf()) {
+				List<Kill> kills = gameService.getKills(player);
+				String k = "";
+				for(int i = 0; i < kills.size(); i++) {
+					k = k + kills.get(i).getVictimID() + " "+ (kills.get(i).getTimestampDate().getTime() / gameService.getGame().getTimer()) + ",";
+				}
+				response.setKills(k);
+				
+			}
 			/*if(player.isWerewolf()) {
 				 response.setKills(gameService.getNumKills(player) + "");
 			}*/

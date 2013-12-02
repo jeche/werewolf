@@ -17,6 +17,7 @@ import edu.wm.werewolf.dao.IVoteDAO;
 import edu.wm.werewolf.exceptions.PlayerAlreadyExistsException;
 import edu.wm.werewolf.model.GPSLocation;
 import edu.wm.werewolf.model.Game;
+import edu.wm.werewolf.model.Kill;
 import edu.wm.werewolf.model.Player;
 import edu.wm.werewolf.model.Vote;
 import edu.wm.werewolf.model.WerewolfUser;
@@ -296,5 +297,11 @@ public class GameService {
 		}
 		
 		return players;
+	}
+
+	public List<Kill> getKills(Player player) {
+		// TODO Auto-generated method stub
+		return killDAO.getKillsByPlayerID(player.getId());
+		
 	}
 }
