@@ -264,6 +264,9 @@ public class HomeController {
 			if(player.isWerewolf()) {
 				List<Kill> kills = gameService.getKills(player);
 				String k = "";
+				if(kills == null) {
+					kills = new ArrayList<Kill>();
+				}
 				for(int i = 0; i < kills.size(); i++) {
 					k = k + kills.get(i).getVictimID() + " "+ (kills.get(i).getTimestampDate().getTime() / gameService.getGame().getTimer()) + ",";
 				}
