@@ -34,7 +34,7 @@ public class MongoKillDAO implements IKillDAO {
 	public void createKill(Player victim, Player killer) throws NoPlayerFoundException {
 		// TODO Auto-generated method stub
 		//		db = mongo.getDB("werewolf");
-		DBCollection table = db.getCollection("Player");
+		DBCollection table = db.getCollection("Kills");
 		// If werewolf kills a player
 		BasicDBObject document = new BasicDBObject();
 		document.put("_id", killer.getId());
@@ -62,7 +62,7 @@ public class MongoKillDAO implements IKillDAO {
 	public List<Kill> getAllKills() {
 		// TODO Auto-generated method stub
 		//		db = mongo.getDB("werewolf");
-		DBCollection table = db.getCollection("Player");
+		DBCollection table = db.getCollection("Kills");
 		DBCursor cursor = table.find();
 		Kill kill;
 		List<Kill> kills = new ArrayList<>();
@@ -92,7 +92,7 @@ public class MongoKillDAO implements IKillDAO {
 	public List<Kill> getKillsByPlayerID(String id)
 			throws NoPlayerFoundException {
 		//		db = mongo.getDB("werewolf");
-		DBCollection table = db.getCollection("Player");
+		DBCollection table = db.getCollection("Kills");
 		// TODO Auto-generated method stub
 		return null;
 	}
