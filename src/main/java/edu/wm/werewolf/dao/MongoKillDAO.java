@@ -36,14 +36,15 @@ public class MongoKillDAO implements IKillDAO {
 		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Kills");
 		// If werewolf kills a player
-		BasicDBObject document = new BasicDBObject();
-		document.put("_id", killer.getId());
-		DBObject doc = table.findOne(document);
+//		BasicDBObject document = new BasicDBObject();
+//		document.put("_id", killer.getId());
+//		DBObject doc = table.findOne(document);
 		BasicDBObject kill = new BasicDBObject();
+		kill.put("killer", killer.getId());
 		kill.put("victim", victim.getId());
 		kill.put("time", new java.util.Date().toString());
 		kill.put("loc", new double[] {victim.getLng(), victim.getLat()});
-		if(doc.get("kills") == null)
+/*		if(doc.get("kills") == null)
 		{
 			List<BasicDBObject> killList = new ArrayList<BasicDBObject>();
 			killList.add(kill);
@@ -54,8 +55,8 @@ public class MongoKillDAO implements IKillDAO {
 			List<BasicDBObject> killList = (List<BasicDBObject>) doc.get("kills");
 			killList.add(kill);
 			doc.put("kills", killList);
-		}
-		table.save(doc);
+		}*/
+		table.save(kill);
 	}
 
 	@Override
@@ -68,7 +69,7 @@ public class MongoKillDAO implements IKillDAO {
 		List<Kill> kills = new ArrayList<>();
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
-			if(item.get("kills") != null)
+			/*if(item.get("kills") != null)
 			{
 				List<BasicDBObject> killList = (List<BasicDBObject>) item.get("kills");
 				for (int i = 0; i < killList.size(); i++) {
@@ -79,11 +80,17 @@ public class MongoKillDAO implements IKillDAO {
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					}*/
+			Date date = new Date();
+					try {
+						kill = new Kill((String) item.get("killer"),(String) item.get("victim"), dateFormat.parse((String) item.get("time")), (double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					kill = new Kill((String) item.get("_id"),(String) killList.get(i).get("victim"), date, (double) ((BasicDBList)killList.get(i).get("loc")).get(1), (double) ((BasicDBList)killList.get(i).get("loc")).get(0));
 					kills.add(kill);
-				}
-			}
+//				}
+//			}
 		}
 		return kills;
 	}
