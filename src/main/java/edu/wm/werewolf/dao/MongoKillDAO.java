@@ -82,12 +82,7 @@ public class MongoKillDAO implements IKillDAO {
 						e.printStackTrace();
 					}*/
 			Date date = new Date();
-					try {
-						kill = new Kill((String) item.get("killer"),(String) item.get("victim"), dateFormat.parse((String) item.get("time")), (double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0));
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					kill = new Kill((String) item.get("killer"),(String) item.get("victim"), new Date(), (double) ((BasicDBList)item.get("loc")).get(1), (double) ((BasicDBList)item.get("loc")).get(0));
 					kills.add(kill);
 //				}
 //			}
