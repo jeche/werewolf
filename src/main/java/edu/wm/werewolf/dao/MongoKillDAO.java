@@ -65,7 +65,7 @@ public class MongoKillDAO implements IKillDAO {
 		//		db = mongo.getDB("werewolf");
 		DBCollection table = db.getCollection("Kills");
 		DBCursor cursor = table.find();
-		Kill kill;
+		Kill kill = null;
 		List<Kill> kills = new ArrayList<>();
 		while (cursor.hasNext()) {
 			DBObject item = cursor.next();
