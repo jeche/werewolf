@@ -6,7 +6,7 @@ public class JsonResponse {
 	
 	String status;
 	String isWerewolf;
-	String kills;
+	List<Kill> kills;
 	long created;
 	String isDead;
 	long nightFreq;
@@ -59,14 +59,14 @@ public class JsonResponse {
 	/**
 	 * @return the kills
 	 */
-	public String getKills() {
+	public List<Kill> getKills() {
 		return kills;
 	}
 
 	/**
 	 * @param kills the kills to set
 	 */
-	public void setKills(String kills) {
+	public void setKills(List<Kill> kills) {
 		this.kills = kills;
 	}
 

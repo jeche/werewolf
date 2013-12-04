@@ -267,10 +267,10 @@ public class HomeController {
 				if(kills == null) {
 					kills = new ArrayList<Kill>();
 				}
-				for(int i = 0; i < kills.size(); i++) {
+			/*	for(int i = 0; i < kills.size(); i++) {
 					k = k + kills.get(i).getVictimID() + " "+ (kills.get(i).getTimestampDate().getTime() / gameService.getGame().getTimer()) + ",";
-				}
-				response.setKills(k);
+				}*/
+				response.setKills(kills);
 				
 			}
 			/*if(player.isWerewolf()) {

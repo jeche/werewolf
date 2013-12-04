@@ -93,10 +93,12 @@ public class GameService {
 	{
 		WerewolfUser user = userDAO.getUserByUsername(userName);
 		Player player = playerDAO.getPlayerByID(user.getId());
-		player.setLat(location.getLat());
-		player.setLng(location.getLng());
-		player.setHasUpdated(true);
-		playerDAO.update(player);
+		if(player.isDead()) {
+			player.setLat(location.getLat());
+			player.setLng(location.getLng());
+			player.setHasUpdated(true);
+			playerDAO.update(player);
+		}
 	}
 
 	public boolean voteKill(String name) {
