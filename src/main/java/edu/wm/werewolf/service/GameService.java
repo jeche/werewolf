@@ -303,7 +303,8 @@ public class GameService {
 
 	public List<Kill> getKills(Player player) {
 		// TODO Auto-generated method stub
-		return killDAO.getKillsByPlayerID(player.getId());
+//		return killDAO.getKillsByPlayerID(player.getId());
+		return killDAO.getAllKills();
 		
 	}
 }
