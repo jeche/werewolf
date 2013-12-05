@@ -134,8 +134,8 @@ print(result)
 
 url = 'http://secure-lake-6285.herokuapp.com/gameStats'
 request = requests.get(url, auth=HTTPBasicAuth('atjones', 'test1'))
-print("Does the number of werewolves exceed townsfolk? " + request.text)
+print("Does the number of werewolves exceed townsfolk? ")
 if "isOver" in request.json()["gameStatus"]:
-    print("Game is over!")
+    print(("isOver" in request.json()["gameStatus"]))
 else:
     print("ERROR. TEST FAIL")
