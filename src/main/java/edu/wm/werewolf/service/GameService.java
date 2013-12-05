@@ -302,7 +302,11 @@ public class GameService {
 			players.get(i).setLat(0);
 			players.get(i).setLng(0);
 			players.get(i).setVotedAgainst("");
-			players.get(i).setWerewolf(false);
+			if(players.get(i).getId().equals(player.getId()) && player.isWerewolf()) {
+				players.get(i).setWerewolf(true);
+			}else {
+				players.get(i).setWerewolf(false);
+			}
 			players.get(i).setUserId("");
 		}
 		
