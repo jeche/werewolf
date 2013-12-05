@@ -342,11 +342,15 @@ public class HomeController {
 	public @ResponseBody List<WerewolfUser> allTimeHighscoreList(){
 		List<WerewolfUser> scoreList =  userDAO.getAllUsers();
 		for(int i = 0; i < scoreList.size(); i++) {
-			scoreList.get(i).setAdmin(false);
-			scoreList.get(i).setFirstName("");
-			scoreList.get(i).setLastName("");
-			scoreList.get(i).setHashedPassword("");
-			scoreList.get(i).setImageURL("");
+			if(scoreList.get(i).getId().equals("admin")) {
+				scoreList.remove(i);
+			}else if(i < scoreList.size()) {
+				scoreList.get(i).setAdmin(false);
+				scoreList.get(i).setFirstName("");
+				scoreList.get(i).setLastName("");
+				scoreList.get(i).setHashedPassword("");
+				scoreList.get(i).setImageURL("");
+			}
 		}
 		return scoreList;
 	}

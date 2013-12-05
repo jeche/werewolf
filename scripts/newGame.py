@@ -9,34 +9,34 @@ print("Clearing was: " + request.json()["status"])
 
 # Add atjones try first time.  Fails because first it has to recreate admin user.
 url = 'http://secure-lake-6285.herokuapp.com/addUser'
-payload = {'userName': 'atjones', 'id':'atjones', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
+payload = {'userName': 'atjones', 'id':'atjones', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1', 'img':"F"}
 #print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
 
 # Add atjones
 url = 'http://secure-lake-6285.herokuapp.com/addUser'
-payload = {'userName': 'atjones', 'id':'atjones', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
+payload = {'userName': 'atjones', 'id':'atjones', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1', 'img':"F"}
 print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
 print("Addition was: " + request.json()["status"])
 
 # Add jlchen
 url = 'http://secure-lake-6285.herokuapp.com/addUser'
-payload = {'userName': 'jlchen', 'id':'jlchen', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
+payload = {'userName': 'jlchen', 'id':'jlchen', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1', 'img':"F"}
 print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
 print("Addition was: " + request.json()["status"])
 
 # Add aablohm
 url = 'http://secure-lake-6285.herokuapp.com/addUser'
-payload = {'userName': 'aablohm', 'id':'aablohm', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
+payload = {'userName': 'aablohm', 'id':'aablohm', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1', 'img':"F"}
 print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
 print("Addition was: " + request.json()["status"])
 
 # Add sychen
 url = 'http://secure-lake-6285.herokuapp.com/addUser'
-payload = {'userName': 'sychen', 'id':'sychen', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1'}
+payload = {'userName': 'sychen', 'id':'sychen', 'firstName':'A', 'lastName':'J', 'hashedPassword':'test1', 'img':"F"}
 print("Adding the user " + payload['userName'] +" to the database using " + url + " password is: " + payload['hashedPassword'])
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('admin', 'admin'))
 print("Addition was: " + request.json()["status"])
@@ -119,7 +119,7 @@ print(result)
 
 url = 'http://secure-lake-6285.herokuapp.com/players/kill'
 payload = {'victim':'aablohm'}
-print("Atjones attacking sychen")
+print("Atjones attacking aablohm")
 # Makes request
 request = requests.post(url, data=payload, auth=HTTPBasicAuth('atjones', 'test1'))
 print("Attacking aablohm " + request.json()["status"])
@@ -132,6 +132,10 @@ for item in request.json():
 	result = "failed"
 print(result)
 
-url = 'http://secure-lake-6285.herokuapp.com/game'
-request = requests.get(url, auth=HTTPBasicAuth('admin', 'admin'))
+url = 'http://secure-lake-6285.herokuapp.com/gameStats'
+request = requests.get(url, auth=HTTPBasicAuth('atjones', 'test1'))
 print("Does the number of werewolves exceed townsfolk? " + request.text)
+if "isOver" in request.json()["gameStatus"]:
+    print("Game is over!")
+else:
+    print("ERROR. TEST FAIL")

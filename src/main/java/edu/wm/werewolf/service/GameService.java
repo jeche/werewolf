@@ -29,9 +29,11 @@ public class GameService {
 	@Autowired private IKillDAO killDAO;
 	@Autowired private IGameDAO gameDAO;
 	@Autowired private IVoteDAO voteDAO;
-	final private double DEFAULT_KILL_RANGE = 200;
-	final private double DEFAULT_SCENT_RANGE = 200;
-	final private int KILL_POINTS = 2;
+	final private double DEFAULT_KILL_RANGE = 0.00125;
+	final private double DEFAULT_SCENT_RANGE = 0.0015;
+	final private int KILL_POINTS = 100;
+	final private int VOTE_POINTS = 1;
+	final private int ALIVE_POINTS = 10;
 	private boolean isRunning = false;
 	Timer timer;
 	Game game;
@@ -80,7 +82,10 @@ public class GameService {
 	public List<Player> killable(String killer)
 	{
 		Player killerDB = playerDAO.getPlayerByID(killer);
-		List<Player> killable = playerDAO.nearPlayers(killerDB, DEFAULT_KILL_RANGE);
+		List<Player> killable = new ArrayList<Player>();
+		if (killerDB.isWerewolf() && !killerDB.isDead() && this.getGame().isNight()) {
+			killable  = playerDAO.nearPlayers(killerDB, DEFAULT_KILL_RANGE);
+		}
 		return killable;
 	}
 	
@@ -185,6 +190,7 @@ public class GameService {
 		Vote vote = new Vote(voted, 1, game.getDayNightFreq(), game.getTimer());
 		voteDAO.addVote(vote);
 		player.setVotedAgainst(voted);
+		player.setScore(player.getScore() + VOTE_POINTS);
 		playerDAO.update(player);
 		return true;
 	}
@@ -192,7 +198,7 @@ public class GameService {
 	public List<Player> scent(String userId){
 		WerewolfUser user = userDAO.getUserByUsername(userId);
 		Player werewolf = playerDAO.getPlayerByID(user.getId());
-		if(!werewolf.isWerewolf() || werewolf.isDead()) {
+		if(!werewolf.isWerewolf() || werewolf.isDead()|| !this.getGame().isNight()) {
 			return null;
 		}
 		return playerDAO.nearPlayers(werewolf, DEFAULT_SCENT_RANGE);
