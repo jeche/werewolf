@@ -10,5 +10,6 @@ public interface IKillDAO {
 	void createKill(Player victim, Player killer) throws NoPlayerFoundException;
 	List<Kill> getAllKills();
 	List<Kill> getKillsByPlayerID(String id) throws NoPlayerFoundException;
+	void clearKills();
 
 }

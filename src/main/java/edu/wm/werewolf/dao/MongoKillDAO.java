@@ -127,5 +127,12 @@ public class MongoKillDAO implements IKillDAO {
 	public void setDb(DB db) {
 		this.db = db;
 	}
+
+	@Override
+	public void clearKills() {
+		// TODO Auto-generated method stub
+		db.getCollection("Kills").drop();
+		
+	}
 	
 }

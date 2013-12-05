@@ -119,6 +119,7 @@ public class GameService {
 		gameDAO.removeGame();
 		playerDAO.clearPlayers();
 		voteDAO.clearVotes();
+		killDAO.clearKills();
 		game = new Game(gameTime, (new Date()).getTime());
 		isRunning = true;
 		List<WerewolfUser> users = userDAO.getAllUsers();
@@ -149,6 +150,7 @@ public class GameService {
 		gameDAO.removeGame();
 		playerDAO.clearPlayers();
 		voteDAO.clearVotes();
+		killDAO.clearKills();
 		game = new Game(gameTime, (new Date()).getTime());
 		isRunning = true;
 		List<WerewolfUser> users = userDAO.getAllUsers();
@@ -244,9 +246,9 @@ public class GameService {
 	}
 
 	public void endGame() {
-		gameDAO.removeGame();
-		playerDAO.clearPlayers();
-		voteDAO.clearVotes();
+//		gameDAO.removeGame();
+//		playerDAO.clearPlayers();
+//		voteDAO.clearVotes();
 		isRunning = false;
 	}
 
