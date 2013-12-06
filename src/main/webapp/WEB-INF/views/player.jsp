@@ -17,9 +17,7 @@ background-repeat:no-repeat;}
 <style type="text/css">
 .font {color:red;}
 .accordion {width:50%;}
-body {background-image:url("resources/wolfs-cry.jpg");
-background-repeat:no-repeat;
-background-size:100%}
+
 .ui-widget-content {background-color: rgba(0,0,0,0.6);color: #ffffff;}
 .ui-accordion-content {background-color: rgba(0,0,0,0.6);
 color: #ffffff;}
@@ -133,11 +131,6 @@ $.getJSON("/players/all", function(data) {
 });
 
 </script>
-<<<<<<< HEAD
-=======
-
-</div>
->>>>>>> 5680f370601af9d09f2fb196f39990c6330c265a
 </div>
 </div>
 <script>
