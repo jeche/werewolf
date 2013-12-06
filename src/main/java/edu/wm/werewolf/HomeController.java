@@ -262,7 +262,7 @@ public class HomeController {
 				if(scoreList.get(i).getId().equals("admin")) {
 //					scoreList.remove(i);
 				}else {
-					Player uPlayer = new Player(user.getId(), false, 0, 0, user.getId(), false, false, "");
+					Player uPlayer = new Player(scoreList.get(i).getId(), false, 0, 0, scoreList.get(i).getId(), false, false, "");
 					uPlayer.setScore(scoreList.get(i).getScore());
 					retList.add(uPlayer);
 					
