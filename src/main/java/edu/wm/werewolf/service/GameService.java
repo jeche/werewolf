@@ -299,8 +299,10 @@ public class GameService {
 				// If a scented player is a werewolf the score the other player sees is 2.
 				players.get(i).setScore(0);
 			}
-			players.get(i).setLat(0);
-			players.get(i).setLng(0);
+			if(!players.get(i).isDead()) {
+				players.get(i).setLat(0);
+				players.get(i).setLng(0);
+			}
 			players.get(i).setVotedAgainst("");
 			if(players.get(i).getId().equals(player.getId()) && player.isWerewolf()) {
 				players.get(i).setWerewolf(true);
