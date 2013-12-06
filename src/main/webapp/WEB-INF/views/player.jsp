@@ -3,41 +3,88 @@
 <html>
 <head>
 	<title>Home</title>
-</head>
-<body>
-<h1>
-	Hello world!  
-</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
-<head>
 <meta charset="utf-8">
 <title>accordion demo</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<style>
+#accordion {
+width:100%;
+}
+
+#center {
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+}
+
+.ui-accordion-content { 
+background-color: rgba(0, 0, 0, 0.6);
+color: white;}
+
+.ui-widget-content {
+background: rgba(0,0,0,0.6);
+}
+
+.ui-state-active {
+background-color: black;
+color: white;
+}
+
+.ui-state-default {
+background: black;
+color:white;
+font-size:1.5em;
+}
+
+.button {
+	text-decoration: none;
+	background-color:rgba(0, 0, 0, 0.6);
+	padding: 5px;
+	color:white;
+	border:none;
+	margin: 20px;
+	border:solid thin transparent;
+}
+
+.button:hover {
+	background-color:rgba(0, 0, 0, .1);
+	border-color: white;
+} 
+
+.input {
+    background-color:rgba(0,0,0,0.4);
+    border: 0;
+    color: white;
+    width: 300px;
+    margin: 5px;
+}
+</style>
 </head>
 <body>
+<div id="center">
 <div id="accordion">
 <h3>Kill</h3>
 <div>
 <form action="/players/kill" method="post">
-Victim: <input type="text" name="victim"><br>
-<input type="submit" value="Submit">
+Victim: <input class="input" type="text" name="victim"><br>
+<input class="button" type="submit" value="Submit">
 </form> 
 </div>
 <h3>Vote</h3>
 <div id="images">
 <form action="/players/vote" method="post" id="form_id">
-<select id="voted" name="voted" size="4"></select><br>
-<input type="submit" value="Submit">
+<select class="input" id="voted" name="voted" size="4"></select><br>
+<input class="button" type="submit" value="Submit">
 </form> 
 </div>
 <h3>Scent</h3>
 <div>
 <form action="/players/kill" method="post">
-<select id="victim" name="victim" size="4"></select><br>
-<input type="submit" value="Attack">
+<select class="input" id="victim" name="victim" size="4"></select><br>
+<input class="button" type="submit" value="Attack">
 </form> 
 <script>
 $.getJSON("/players/scent", function(data) {
@@ -70,11 +117,8 @@ $.getJSON("/players/all", function(data) {
 });
 
 </script>
-<ul>
-<li>List item one</li>
-<li>List item two</li>
-<li>List item three</li>
-</ul>
+
+</div>
 </div>
 </div>
 <script>
