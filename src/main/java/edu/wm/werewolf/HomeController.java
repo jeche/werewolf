@@ -262,7 +262,7 @@ public class HomeController {
 			response.setNumPeep(gameService.getPeepNum());
 			response.setNumWolf(gameService.getWolfNum());
 			response.setKills(new ArrayList<Kill>());
-			if(player.isWerewolf()) {
+//			if(player.isWerewolf()) {
 				List<Kill> kills = gameService.getKills(player);
 				String k = "";
 				if(kills == null) {
@@ -273,7 +273,7 @@ public class HomeController {
 				}*/
 				response.setKills(kills);
 				
-			}
+//			}
 			/*if(player.isWerewolf()) {
 				 response.setKills(gameService.getNumKills(player) + "");
 			}*/
