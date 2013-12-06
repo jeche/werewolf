@@ -22,6 +22,7 @@ background-repeat:no-repeat;}
 body {background-image:url("resources/wolfs-cry.jpg");
 background-repeat:no-repeat;
 background-size:100%}
+.ui-widget-content {background-color: rgba(0,0,0,0.6);color: #ffffff;}
 .ui-accordion-content {background-color: rgba(0,0,0,0.6);
 color: #ffffff;}
 </style>
