@@ -145,6 +145,7 @@ public class HomeController {
 			}
 		} catch (Exception e) {
 			response.setStatus("failure;" + e.getStackTrace().toString());
+			e.printStackTrace();
 		}
 		return response;
 	}
