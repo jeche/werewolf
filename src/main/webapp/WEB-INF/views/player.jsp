@@ -6,6 +6,7 @@
 <style type="text/css">
 .font {color:red;}
 .accordion {width:50%;}
+body {background-image:url="resources/wolfs-cry.jpg"}
 </style>
 	<title>Home</title>
 </head>
