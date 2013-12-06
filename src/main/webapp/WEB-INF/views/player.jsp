@@ -3,11 +3,6 @@
 
 <html>
 <head>
-<style type="text/css">
-.font {color:red;}
-.accordion {width:50%;}
-body {background-image:url("resources/wolfs-cry.jpg");}
-</style>
 	<title>Home</title>
 </head>
 <body>
@@ -15,6 +10,15 @@ body {background-image:url("resources/wolfs-cry.jpg");}
 <meta charset="utf-8">
 <title>accordion demo</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<style type="text/css">
+.font {color:red;}
+.accordion {width:50%;}
+body {background-image:url("resources/wolfs-cry.jpg");
+background-repeat:no-repeat;
+background-size:100%}
+.ui-widget-content {background-color: rgba(0,0,0,0.6);
+color: #ffffff;}
+</style>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
