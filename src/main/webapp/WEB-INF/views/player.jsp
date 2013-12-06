@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<jsp:include page="main.css"/>
 <html>
 <head>
 	<title>Home</title>
