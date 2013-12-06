@@ -1,8 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<jsp:include page="main.css"/>
+
 <html>
 <head>
+<style type="text/css">
+.font {color:red;}
+.accordion {width:50%;}
+</style>
 	<title>Home</title>
 </head>
 <body>
