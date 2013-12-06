@@ -251,9 +251,42 @@ public class HomeController {
 	public @ResponseBody JsonResponse gameStats(ModelMap model, Principal principal) {
 		JsonResponse response = new JsonResponse("success");
 		System.out.println(principal.getName());
+		WerewolfUser user = userDAO.getUserByUsername(principal.getName());
+		try {
+			
+			Player player = playerDAO.getPlayerByID(user.getId());
+		}catch(Exception e) {
+			List<WerewolfUser> scoreList =  userDAO.getAllUsers();
+			List<Player>retList = new ArrayList<Player>(); 
+			for(int i = 0; i < scoreList.size(); i++) {
+				if(scoreList.get(i).getId().equals("admin")) {
+//					scoreList.remove(i);
+				}else if(i < scoreList.size()) {
+					Player uPlayer = new Player(user.getId(), false, 0, 0, user.getId(), false, false, "");
+					uPlayer.setScore(scoreList.get(i).getScore());
+					retList.add(uPlayer);
+					
+					
+					scoreList.get(i).setAdmin(false);
+					scoreList.get(i).setFirstName("");
+					scoreList.get(i).setLastName("");
+					scoreList.get(i).setHashedPassword("");
+					scoreList.get(i).setImageURL("");
+				}
+			}
+			response.setPlayers(retList);
+//			Player player = playerDAO.getPlayerByID(user.getId());
+			response.setCreated(gameService.getGame().getTimer());
+			response.setNightFreq(gameService.getGame().getDayNightFreq());
+			response.setIsDead(true + "");
+			response.setIsWerewolf(false+"");
+			response.setNumPeep(0);
+			response.setNumWolf(0);
+			return response;
+		}
 		response.setGameStatus(gameService.getGame().isNight() + " " + gameService.getAllAlive().size());
 		if(principal != null && principal.getName() != null) {
-			WerewolfUser user = userDAO.getUserByUsername(principal.getName());
+			user = userDAO.getUserByUsername(principal.getName());
 			Player player = playerDAO.getPlayerByID(user.getId());
 			response.setCreated(gameService.getGame().getTimer());
 			response.setNightFreq(gameService.getGame().getDayNightFreq());
