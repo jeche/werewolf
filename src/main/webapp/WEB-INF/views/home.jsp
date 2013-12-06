@@ -75,6 +75,7 @@ padding-top:20px;
 <label class="label">Password:</label> <input class="input alignBox" type="password" name="hashedPassword"><br>
 <label class="label">User name:</label> <input class="input alignBox" type="text" name="userName"><br>
 <label class="label">ID:</label> <input class="input alignBox" type="text" name="id"><br>
+<label class="label">IMG:</label> <input class="input alignBox" type="text" name="img"><br>
 <input class="button" type="submit" value="Submit">
 </form> 
 </body>
