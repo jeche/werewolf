@@ -261,7 +261,7 @@ public class HomeController {
 			for(int i = 0; i < scoreList.size(); i++) {
 				if(scoreList.get(i).getId().equals("admin")) {
 //					scoreList.remove(i);
-				}else if(i < scoreList.size()) {
+				}else {
 					Player uPlayer = new Player(user.getId(), false, 0, 0, user.getId(), false, false, "");
 					uPlayer.setScore(scoreList.get(i).getScore());
 					retList.add(uPlayer);
