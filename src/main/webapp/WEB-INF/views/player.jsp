@@ -3,6 +3,12 @@
 
 <html>
 <head>
+<style type="text/css">
+.font {color:red;}
+.accordion {width:50%;}
+body {background-image:url("resources/wolfs-cry.jpg");
+background-repeat:no-repeat;}
+</style>
 	<title>Home</title>
 </head>
 <body>
