@@ -98,7 +98,7 @@ public class GameService {
 	{
 		WerewolfUser user = userDAO.getUserByUsername(userName);
 		Player player = playerDAO.getPlayerByID(user.getId());
-		if(player.isDead()) {
+		if(!player.isDead()) {
 			player.setLat(location.getLat());
 			player.setLng(location.getLng());
 			player.setHasUpdated(true);

@@ -1,0 +1,101 @@
+2013-12-06T01:49:52.808677+00:00 app[web.1]: 	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+2013-12-06T01:49:52.808677+00:00 app[web.1]: 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+2013-12-06T01:49:52.808677+00:00 app[web.1]: 	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1008)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+2013-12-06T01:49:52.809087+00:00 app[web.1]: 	at java.lang.Thread.run(Thread.java:744)
+2013-12-06T01:49:52.809087+00:00 app[web.1]: 
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+2013-12-06T01:49:52.808821+00:00 app[web.1]: 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1686)
+2013-12-06T01:49:52.825229+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=5ms service=14ms status=401 bytes=1137
+2013-12-06T01:50:42.069861+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:50:42.061095+00:00 app[web.1]: atjones
+2013-12-06T01:50:42.065953+00:00 app[web.1]: It is day time.
+2013-12-06T01:50:51.915154+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=193ms status=200 bytes=159
+2013-12-06T01:50:51.485182+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=4ms service=440ms status=200 bytes=159
+2013-12-06T01:51:43.164667+00:00 app[web.1]: It is night time.
+2013-12-06T01:51:43.167459+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:51:43.161789+00:00 app[web.1]: atjones
+2013-12-06T01:51:52.229720+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=0ms service=271ms status=200 bytes=159
+2013-12-06T01:52:13.018972+00:00 app[web.1]: jlchen
+2013-12-06T01:52:13.022240+00:00 app[web.1]: It is night time.
+2013-12-06T01:52:13.037364+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:52:13.056513+00:00 app[web.1]: It is night time.
+2013-12-06T01:52:13.067545+00:00 app[web.1]: It is night time.
+2013-12-06T01:52:13.075188+00:00 app[web.1]: It is night time.
+2013-12-06T01:52:13.077516+00:00 app[web.1]: It is night time.
+2013-12-06T01:52:13.119756+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=294ms status=200 bytes=834
+2013-12-06T01:52:14.763097+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=3ms service=190ms status=200 bytes=159
+2013-12-06T01:50:42.152178+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=11ms service=240ms status=200 bytes=743
+2013-12-06T01:53:13.996406+00:00 app[web.1]: jlchen
+2013-12-06T01:53:13.999143+00:00 app[web.1]: It is day time.
+2013-12-06T01:53:14.001749+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:53:14.020593+00:00 app[web.1]: It is day time.
+2013-12-06T01:53:14.031998+00:00 app[web.1]: It is day time.
+2013-12-06T01:52:25.181003+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=1ms service=171ms status=200 bytes=159
+2013-12-06T01:54:14.395485+00:00 app[web.1]: jlchen
+2013-12-06T01:54:14.398652+00:00 app[web.1]: It is day time.
+2013-12-06T01:54:14.402457+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:54:14.426215+00:00 app[web.1]: It is day time.
+2013-12-06T01:54:14.435677+00:00 app[web.1]: It is day time.
+2013-12-06T01:53:14.106887+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=279ms status=200 bytes=834
+2013-12-06T01:53:24.382050+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=274ms status=200 bytes=159
+2013-12-06T01:54:14.486720+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=4ms service=246ms status=200 bytes=834
+2013-12-06T01:55:14.936053+00:00 app[web.1]: jlchen
+2013-12-06T01:55:14.941783+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:55:14.961423+00:00 app[web.1]: It is night time.
+2013-12-06T01:55:14.971959+00:00 app[web.1]: It is night time.
+2013-12-06T01:55:14.981988+00:00 app[web.1]: It is night time.
+2013-12-06T01:55:14.979041+00:00 app[web.1]: It is night time.
+2013-12-06T01:55:14.938895+00:00 app[web.1]: It is night time.
+2013-12-06T01:55:24.919973+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=184ms status=200 bytes=159
+2013-12-06T01:55:24.443723+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=51ms service=536ms status=200 bytes=159
+2013-12-06T01:55:15.032795+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=0ms service=295ms status=200 bytes=834
+2013-12-06T01:54:24.050729+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=5ms service=240ms status=200 bytes=159
+2013-12-06T01:56:15.665831+00:00 app[web.1]: jlchen
+2013-12-06T01:56:15.668601+00:00 app[web.1]: It is day time.
+2013-12-06T01:56:15.671517+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:56:15.698293+00:00 app[web.1]: It is day time.
+2013-12-06T01:56:15.690646+00:00 app[web.1]: It is day time.
+2013-12-06T01:56:24.605026+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=0ms service=302ms status=200 bytes=159
+2013-12-06T01:56:35.967937+00:00 app[web.1]: It is day time.
+2013-12-06T01:56:35.962126+00:00 app[web.1]: jlchen
+2013-12-06T01:56:35.971292+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:56:35.997514+00:00 app[web.1]: It is day time.
+2013-12-06T01:56:36.004660+00:00 app[web.1]: It is day time.
+2013-12-06T01:56:38.272156+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.175.18" dyno=web.1 connect=1ms service=209ms status=200 bytes=159
+2013-12-06T01:56:38.814053+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.175.18" dyno=web.1 connect=3ms service=472ms status=200 bytes=159
+2013-12-06T01:56:49.687187+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.175.18" dyno=web.1 connect=44ms service=766ms status=200 bytes=159
+2013-12-06T01:57:16.501714+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:16.504527+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:57:16.497314+00:00 app[web.1]: jlchen
+2013-12-06T01:57:16.527550+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:16.553290+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:16.543103+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:16.550787+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:16.591779+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=13ms service=363ms status=200 bytes=834
+2013-12-06T01:57:24.255832+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=3ms service=317ms status=200 bytes=159
+2013-12-06T01:57:24.824419+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=175ms status=200 bytes=159
+2013-12-06T01:57:40.357272+00:00 app[web.1]: jlchen
+2013-12-06T01:57:40.359968+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:40.363088+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:57:40.384300+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:40.395570+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:40.402071+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:40.405376+00:00 app[web.1]: It is night time.
+2013-12-06T01:57:40.453628+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.175.18" dyno=web.1 connect=24ms service=424ms status=200 bytes=834
+2013-12-06T01:57:47.999589+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.175.18" dyno=web.1 connect=4ms service=265ms status=200 bytes=159
+2013-12-06T01:57:56.473387+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=186ms status=200 bytes=159
+2013-12-06T01:57:46.006229+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=360ms status=200 bytes=159
+2013-12-06T01:58:17.170113+00:00 app[web.1]: jlchen
+2013-12-06T01:58:17.172357+00:00 app[web.1]: It is day time.
+2013-12-06T01:58:17.175456+00:00 app[web.1]: INFO : edu.wm.werewolf.dao.MongoPlayerDAO - All alive players:[Player [id=jlchen, isDead=false, lat=0.0, lng=0.0, userId=jlchen, isWerewolf=true, votedAgainst=null, score=0], Player [id=aablohm, isDead=false, lat=0.0, lng=0.0, userId=aablohm, isWerewolf=false, votedAgainst=null, score=0]]
+2013-12-06T01:58:17.194405+00:00 app[web.1]: It is day time.
+2013-12-06T01:58:17.200984+00:00 app[web.1]: It is day time.
+2013-12-06T01:58:17.252716+00:00 heroku[router]: at=info method=GET path=/gameStats host=secure-lake-6285.herokuapp.com fwd="128.239.150.156" dyno=web.1 connect=2ms service=248ms status=200 bytes=834
+2013-12-06T01:56:53.410156+00:00 heroku[router]: at=info method=POST path=/players/location host=secure-lake-6285.herokuapp.com fwd="128.239.175.18" dyno=web.1 connect=7ms service=193ms status=200 bytes=159
